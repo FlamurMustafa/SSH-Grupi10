@@ -13,9 +13,6 @@ app.use(bodyParser.urlencoded({
 
 app.post('/user/signup', (req, res)=>{
     const {username, name, lastname, is_professor, email, password} = req.body;
-    bcrypt.hash(password, 8, process.env.KEY, (err, hash)=>{
-        password = hash;
-    });
     const hashedPassword = bcrypt.hashSync(password, 5);
     pool.query('INSERT into user(username, name, lastname, is_professor, email, password) VALUES '+
     '(?,?,?,?,?,?)', [username, name, lastname, is_professor, email, hashedPassword ], (error, results)=>{
