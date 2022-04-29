@@ -40,7 +40,6 @@ app.get('/user/:email', (req, res)=>{
             return res.status(200).json(result);
         })
     } catch(e){
-        
     }
 
 
