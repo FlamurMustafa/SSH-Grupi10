@@ -83,7 +83,7 @@ app.get("/user/:email", (req, res) => {
 
 app.post("/class/post", async (req, res) => {
   pool.query(
-    `SELECT * from classes where start_time>="${req.body.start_time}" and end_time<="${req.body.end_time}" and class_number=${req.body.class_number}`,
+    `SELECT * from classes where end_time>"${req.body.start_time}" and start_time<"${req.body.end_time}" and class_number=${req.body.class_number}`,
     (error, result) => {
       if (error) return res.sendStatus(500);
       if (result.length!==0){        
