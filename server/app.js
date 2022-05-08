@@ -59,11 +59,16 @@ app.post("/user/login", async (req, res) => {
       return res.status(404).send("Not the password");
     }
 
-    res.send(jwt.sign({ id: result[0].userid.toString() }, process.env.KEY));
+    res.send(
+      jwt.sign(
+        { id: result[0].userid.toString(), role_id: result[0].role_id },
+        process.env.KEY
+      )
+    );
   }
 });
 
-app.get("/user/:email", Auth, (req, res) => {
+app.get("/user", Auth, (req, res) => {
   try {
     pool.query(
       "SELECT username, email, role_id, name FROM user where id = ?",
@@ -92,7 +97,7 @@ app.post("/class/post", Auth, async (req, res) => {
       pool.query(
         `Select classid from class where lecturer=${req.userId}`,
         (err, result) => {
-          if (err) return res.status(err);
+          if (err) return res.status(500).json({ error });
           insertIntoClass(result);
         }
       );
@@ -105,14 +110,33 @@ app.post("/class/post", Auth, async (req, res) => {
             req.body.end_time,
             result[0].classid,
           ],
-          (result, err) => {
-            if (err) return res.status(500).json({ err });
+          (resultt, err) => {
+            console.log(resultt);
             return res.sendStatus(201);
           }
         );
       }
     }
   );
+});
+
+app.get("/classes", Auth, (req, res) => {
+  if (req.role_Id === 0) {
+    //fetch student's classes
+    pool.query(
+      "select room_id, start_time, end_time, class_name from schedule join class on schedule.classid = class.classid join `student-classes` on `student-classes`.class_classid = class.classid join user on user.userid = `student-classes`.user_userid where user.userid = ?;",
+      [req.userId],
+      (req, result) => {
+        return res.send(result[0]);
+      }
+    );
+  } else {
+    pool.query(
+      "select class_name, start_time, end_time from schedule join class on class.classid = schedule.classid join user on user.userid = class.lecturer where userid = ?;",[req.userId], (errorq, resultq)=>{
+        if(errorq) res.status(500).send(err);
+        else return res.send(resultq[0]);
+      });
+  }
 });
 
 app.listen(3000);
