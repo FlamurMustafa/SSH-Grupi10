@@ -126,7 +126,8 @@ app.get("/classes", Auth, (req, res) => {
     pool.query(
       "select room_id, start_time, end_time, class_name from schedule join class on schedule.classid = class.classid join `student-classes` on `student-classes`.class_classid = class.classid join user on user.userid = `student-classes`.user_userid where user.userid = ?;",
       [req.userId],
-      (req, result) => {
+      (errorq, result) => {
+        if(errorq) res.status(500).send({errorq});
         return res.send(result[0]);
       }
     );
