@@ -12,6 +12,7 @@ async function Auth(req, res, next ){
 
     req.token = token;
     req.userId = parseInt(decoded.id);
+    req.role_Id = parseInt(decoded.role_id);
     next();
 }
 
