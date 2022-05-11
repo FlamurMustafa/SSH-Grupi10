@@ -4,18 +4,20 @@ const bodyParser = require("body-parser");
 const Auth = require("../middlewares/authorization");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const pool = require("./config/db");
+const pool = require("../config/db");
 
-app.use(bodyParser.json());
-app.use(
+
+const userRoute = express.Router();
+
+userRoute.use(bodyParser.json());
+userRoute.use(
   bodyParser.urlencoded({
     extended: true,
   })
 );
 
-const userRoute = express.Route();
 
-userRoute.post("/user/signup", async (req, res) => {
+userRoute.post("/signup", async (req, res) => {
   const { username, name, lastname, role_id, email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 5);
   try {
@@ -41,7 +43,7 @@ userRoute.post("/user/signup", async (req, res) => {
   }
 });
 
-userRoute.post("/user/login", async (req, res) => {
+userRoute.post("/login", async (req, res) => {
   let { email, username, password } = req.body;
 
   try {
@@ -64,15 +66,14 @@ userRoute.post("/user/login", async (req, res) => {
   }
 });
 
-userRoute.get("/user/:email", Auth, (req, res) => {
+userRoute.get("/", Auth, (req, res) => {
   try {
     pool.query(
-      "SELECT username, email, role_id, name FROM user where id = ?",
+      "SELECT username, email, role_id, name FROM user where userid = ?",
       [req.userId],
       (error, result) => {
         if (error) return res.status(400).json({ error });
         result = JSON.parse(JSON.stringify(result));
-        console.log(result);
         return res.status(200).json(result);
       }
     );
