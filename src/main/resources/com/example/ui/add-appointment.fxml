@@ -35,7 +35,7 @@
                   </Label>
                   <ImageView fitHeight="154.0" fitWidth="161.0" focusTraversable="true" layoutX="69.0" layoutY="47.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Add_Appointment_Professor.png" />
+                        <Image url="@../../../../../../Add_Appointment/src/Add_Appointment_Professor.png" />
                      </image>
                   </ImageView>
                </children></Pane>
