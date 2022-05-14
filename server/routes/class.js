@@ -4,8 +4,6 @@ const bodyParser = require("body-parser");
 
 const pool = require("../config/db");
 
-
-
 const classRoute = express.Router();
 
 classRoute.use(bodyParser.json());
@@ -72,4 +70,14 @@ classRoute.get("/", Auth, (req, res) => {
   }
 });
 
+classRoute.delete("/", Auth, (req, res) => {
+  pool.query(
+    "DELETE from schedule where scheduleid=?",
+    [req.query.scheduleid],
+    (error, result) => {
+      if (error) return res.status(500).json({ error });
+      return res.sendStatus(200);
+    }
+  );
+});
 module.exports = classRoute;
