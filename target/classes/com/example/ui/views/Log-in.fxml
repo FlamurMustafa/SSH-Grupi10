@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<AnchorPane prefHeight="457.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="-2.0" layoutY="1.0" prefHeight="130.0" prefWidth="496.0" />
+      <Pane layoutX="-1.0" layoutY="124.0" prefHeight="333.0" prefWidth="494.0">
+         <children>
+            <Label layoutX="85.0" layoutY="31.0" prefHeight="35.0" prefWidth="133.0" text="Email or username" />
+            <Label layoutX="88.0" layoutY="147.0" text="Password" />
+            <TextFlow layoutX="88.0" layoutY="172.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
+            <TextFlow layoutX="85.0" layoutY="66.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
+            <Button layoutX="169.0" layoutY="225.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #FF8C00; -fx-background-radius: 10;" text="Log In" textFill="#f4eeee">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="253.0" layoutY="279.0" prefHeight="17.0" prefWidth="154.0" text="If you haven't registerd yet?" />
+            <Hyperlink layoutX="404.0" layoutY="276.0" text="Register Now" textFill="DARKORANGE" />
+         </children>
+      </Pane>
+      <Label layoutX="171.0" layoutY="59.0" prefHeight="48.0" prefWidth="114.0" text="LOG IN" textFill="DARKORANGE">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
