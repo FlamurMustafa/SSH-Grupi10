@@ -52,6 +52,7 @@ userRoute.post("/login", async (req, res) => {
       [email, username],
       (error, result) => {
         if (error) return res.status(400).json({ error });
+        if(result.length===0) return res.status(400).json({ error });
         finishCall(result);
       }
     );
@@ -71,7 +72,7 @@ userRoute.get("/a",  (req, res)=>{
   return res.send("Hello");
 })
 
-userRoute.get("/", (req, res) => {
+userRoute.get("/", Auth, (req, res) => {
   try {
     pool.query(
       "SELECT username, email, role_id, name FROM user where userid = ?",

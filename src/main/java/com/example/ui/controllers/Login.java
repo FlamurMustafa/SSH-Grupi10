@@ -12,19 +12,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import okhttp3.*;
-import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.net.*;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class Login {
     private Stage stage;
-    private OkHttpClient client;
+    private Scene scene;
+    private Parent root;
     @FXML
     private Label popUp;
 
     @FXML
     private Button loginBtn;
+
+    @FXML
+    private Label badRequest;
 
     @FXML
     private TextField emailTf;
@@ -33,31 +36,52 @@ public class Login {
     private TextField passwordTf;
 
     @FXML
-    private void onLoginClicked(ActionEvent action){
-       client = new OkHttpClient();
-        RequestBody formBody = new FormBody.Builder()
-                .add("email", emailTf.getText())
-                .add("password", passwordTf.getText())
-                .build();
+    private void onLoginClicked(ActionEvent action) throws IOException, InterruptedException {
+//        HttpClient client = HttpClient.newHttpClient();
+//        HttpRequest req = HttpRequest.newBuilder()
+//                .POST(HttpRequest.BodyPublishers.noBody())
+//                .uri(URI.create("http://localhost:3000/user/login"))
+//                .build();
+//        HttpResponse<String> res = client.send(req, HttpResponse.BodyHandlers.ofString());
 
-       Request request = new Request.Builder()
-               .url("http://localhost:3000/user/login")
-               .post(formBody)
-               .build();
-       Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                System.out.println("Error");
-            }
+        try {
+            OkHttpClient client = new OkHttpClient();
+            RequestBody formBody = new FormBody.Builder()
+                    .add("email", emailTf.getText())
+                    .add("password", passwordTf.getText())
+                    .build();
 
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if(response.isSuccessful()){
-                    System.out.println(response);
-                }
+            Request req = new Request.Builder()
+                    .url("http://localhost:3000/user/login")
+                    .post(formBody)
+                    .build();
+            Call call = client.newCall(req);
+            Response res = call.execute();
+            if (res.isSuccessful()) {
+                String token = res.body().string();
+                File yourFile = new File("src/main/resources/files/token.txt");
+                yourFile.createNewFile();
+                FileOutputStream fl = new FileOutputStream(yourFile, true);
+                fl.write(token.getBytes(StandardCharsets.UTF_8));
+                fl.close();
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/com/example/ui/views/schedules.fxml"));
+                Parent root = loader.load();
+                stage = (Stage) ((Node) action.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+
             }
-        });
+            else if(res.code()==400 ||res.code()==404) {
+            badRequest.setText("There was a mistake in your credentials");
+            }
+        } catch (Exception e){
+            popUp.setText("An error occurred");
+            e.printStackTrace();
+        }
+
     }
 
 }

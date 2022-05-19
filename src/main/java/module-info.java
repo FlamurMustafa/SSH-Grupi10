@@ -4,6 +4,7 @@ module com.example.ui {
     requires java.desktop;
     requires okhttp3;
     requires annotations;
+    requires java.net.http;
 
 
     opens com.example.ui to javafx.fxml;
