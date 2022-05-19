@@ -62,11 +62,16 @@ userRoute.post("/login", async (req, res) => {
       return res.status(404).send("Not the password");
     }
 
-    res.send(jwt.sign({ id: result[0].userid.toString() }, process.env.KEY));
+    return res.send(jwt.sign({ id: result[0].userid.toString() }, process.env.KEY));
   }
 });
 
-userRoute.get("/", Auth, (req, res) => {
+userRoute.get("/a",  (req, res)=>{
+  console.log("hello");
+  return res.send("Hello");
+})
+
+userRoute.get("/", (req, res) => {
   try {
     pool.query(
       "SELECT username, email, role_id, name FROM user where userid = ?",

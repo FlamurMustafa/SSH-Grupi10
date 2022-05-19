@@ -1,7 +1,9 @@
 const jwt = require("jsonwebtoken");
 
-async function Auth(req, res, next ){
+async function Auth(req, res, next){
+    try{
     const token = req.header('Authorization').replace('Bearer ', '');
+    
 
     if(!process.env.KEY){
         throw new Error("No key found");
@@ -14,6 +16,10 @@ async function Auth(req, res, next ){
     req.userId = parseInt(decoded.id);
     req.role_Id = parseInt(decoded.role_id);
     next();
+}
+catch(e){
+    return res.sendStatus(400);
+}
 }
 
 module.exports = Auth;
