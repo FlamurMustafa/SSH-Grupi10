@@ -56,8 +56,8 @@ public class Controller {
     private void onCancelButtonClick(ActionEvent event) {
         try {
             //Go to the main/dashboard page
-            Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
-            primaryStage.setTitle("Dashboard");
+            Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));//Name of javafx file 
+            primaryStage.setTitle("....");
             primaryStage.setScene(new Scene(root, 720, 570));
             primaryStage.show();
 
