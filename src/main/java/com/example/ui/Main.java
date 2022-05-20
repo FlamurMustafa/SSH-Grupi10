@@ -6,10 +6,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    FXMLLoader fxmlLoader;
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("views/Log-in.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
+        if(Token.getToken()!=null){
+            fxmlLoader = new FXMLLoader(Main.class.getResource("views/schedules.fxml"));
+        }else{
+            fxmlLoader = new FXMLLoader(Main.class.getResource("views/Log-in.fxml"));
+        }
+
+        Scene scene = new Scene(fxmlLoader.load(), 800, 550);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

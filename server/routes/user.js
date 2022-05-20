@@ -63,7 +63,7 @@ userRoute.post("/login", async (req, res) => {
       return res.status(404).send("Not the password");
     }
 
-    return res.send(jwt.sign({ id: result[0].userid.toString(), role_id: result[0].role_id.toString }, process.env.KEY));
+    return res.send(jwt.sign({ id: result[0].userid.toString(), role_id: result[0].role_id.toString() }, process.env.KEY));
   }
 });
 
