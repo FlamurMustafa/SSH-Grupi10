@@ -5,12 +5,14 @@ import java.io.FileReader;
 
 public class Token {
     public static String getToken(){
-        String token;
+        String token = null;
         try {
             FileReader fr = new FileReader("src/main/resources/files/token.txt");
             char[] c = new char[136];
             fr.read(c);
             String s = String.valueOf(c);
+            s.replaceAll("\0", "");
+            if(s.charAt(0)==0) throw new Exception();
             token = "Bearer " + s;
         }catch (Exception e){
             return null;
