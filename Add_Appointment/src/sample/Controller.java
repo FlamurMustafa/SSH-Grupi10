@@ -56,10 +56,10 @@ public class Controller {
     private void onCancelButtonClick(ActionEvent event) {
         try {
             //Go to the main/dashboard page
-            //Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
-            //primaryStage.setTitle("Dashboard");
-            //primaryStage.setScene(new Scene(root, 720, 570));
-            //primaryStage.show();
+            Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+            primaryStage.setTitle("Dashboard");
+            primaryStage.setScene(new Scene(root, 720, 570));
+            primaryStage.show();
 
         } catch (Exception e) {
             e.printStackTrace();
