@@ -52,6 +52,7 @@ userRoute.post("/login", async (req, res) => {
       [email, username],
       (error, result) => {
         if (error) return res.status(400).json({ error });
+        if(result.length===0) return res.status(400).json({ error });
         finishCall(result);
       }
     );
@@ -62,9 +63,14 @@ userRoute.post("/login", async (req, res) => {
       return res.status(404).send("Not the password");
     }
 
-    res.send(jwt.sign({ id: result[0].userid.toString() }, process.env.KEY));
+    return res.send(jwt.sign({ id: result[0].userid.toString(), role_id: result[0].role_id.toString() }, process.env.KEY));
   }
 });
+
+userRoute.get("/a",  (req, res)=>{
+  console.log("hello");
+  return res.send("Hello");
+})
 
 userRoute.get("/", Auth, (req, res) => {
   try {
