@@ -67,7 +67,6 @@ public class Login {
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-
             }
             else if(res.code()==400 ||res.code()==404) {
             badRequest.setText("There was a mistake in your credentials");
