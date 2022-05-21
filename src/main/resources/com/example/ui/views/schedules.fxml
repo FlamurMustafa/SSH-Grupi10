@@ -16,16 +16,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="com.example.ui.controllers.Schedules" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.controllers.Schedules">
    <children>
-      <BorderPane layoutY="-7.0" prefHeight="495.0" prefWidth="814.0">
+      <BorderPane layoutY="-7.0" prefHeight="495" prefWidth="814.0">
          <left>
             <VBox prefHeight="428.0" prefWidth="250.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
                <effect>
                   <Blend />
                </effect>
                <children>
-                  <ImageView fitHeight="112.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView disable="true" fitHeight="112.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../images/SeekPng.com_profile-icon-png_9665493.png" />
                      </image>
@@ -58,7 +58,7 @@
                               </Label>
                               <Pane>
                                  <children>
-                                    <TextField alignment="CENTER" layoutX="12.0" prefHeight="26.0" prefWidth="160.0" text="Blerim Rexha">
+                                    <TextField alignment="CENTER" disable="true" layoutX="12.0" prefHeight="26.0" prefWidth="160.0" text="Blerim Rexha">
                                        <font>
                                           <Font name="Microsoft JhengHei Light" size="11.0" />
                                        </font>
@@ -85,7 +85,7 @@
                               </Label>
                               <Pane>
                                  <children>
-                                    <TextField alignment="CENTER" layoutX="11.0" prefHeight="26.0" prefWidth="160.0" text="blerim.rexha">
+                                    <TextField alignment="CENTER" disable="true" layoutX="11.0" prefHeight="26.0" prefWidth="160.0" text="blerim.rexha">
                                        <font>
                                           <Font name="Microsoft JhengHei Light" size="11.0" />
                                        </font>
@@ -112,7 +112,7 @@
                               </Label>
                               <Pane prefHeight="26.0" prefWidth="146.0">
                                  <children>
-                                    <TextField prefHeight="26.0" prefWidth="160.0" text="blerim.rexha@uni-pr.edu">
+                                    <TextField disable="true" prefHeight="26.0" prefWidth="160.0" text="blerim.rexha@uni-pr.edu">
                                        <font>
                                           <Font name="Microsoft JhengHei Light" size="11.0" />
                                        </font>
@@ -129,7 +129,7 @@
                         <Insets top="9.0" />
                      </VBox.margin>
                   </VBox>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" style="-fx-background-color: #286090;" text="Log Out">
+                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" style="-fx-background-color: #286090;" text="Log Out" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="50.0" top="5.0" />
                      </VBox.margin>
@@ -160,7 +160,7 @@
                <center>
                   <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="createBtn" onAction="#onCreateClicked" layoutX="387.0" layoutY="14.0" minWidth="53.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #286090;" text="CREATE" textFill="WHITE">
+                        <Button fx:id="createBtn" layoutX="387.0" layoutY="14.0" minWidth="53.0" mnemonicParsing="false" onAction="#onCreateClicked" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #286090;" text="CREATE" textFill="WHITE">
                            <font>
                               <Font name="Arial" size="11.0" />
                            </font>
