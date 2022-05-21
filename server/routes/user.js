@@ -67,10 +67,10 @@ userRoute.post("/login", async (req, res) => {
   }
 });
 
-userRoute.get("/a",  (req, res)=>{
-  console.log("hello");
-  return res.send("Hello");
-})
+// userRoute.get("/a",  (req, res)=>{
+//   console.log("hello");
+//   return res.send("Hello");
+// })
 
 userRoute.get("/", Auth, (req, res) => {
   try {
