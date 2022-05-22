@@ -70,7 +70,7 @@ public class Signup implements Iterable{
                     "\n\"mnumberTf\":\"" + mnumberTf+"\"\n}");
 
             Request request = new Request.Builder()
-                    .url("http://localhost:3000/user/login")
+                    .url("http://localhost:3000/user/signup")
                     .method("POST", body)
                     .build();
 
