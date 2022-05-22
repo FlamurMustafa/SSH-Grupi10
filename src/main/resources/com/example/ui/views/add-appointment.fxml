@@ -57,7 +57,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField alignment="CENTER" layoutX="15.0" layoutY="48.0" prefHeight="39.0" prefWidth="95.0" promptText="00">
+                        <TextField fx:id="minutesTf" alignment="CENTER" layoutX="15.0" layoutY="48.0" prefHeight="39.0" prefWidth="95.0" promptText="00">
                            <contextMenu>
                               <ContextMenu>
                                  <items>
@@ -81,8 +81,8 @@
                      </children>
                   </Pane>
                   <Separator layoutX="51.0" layoutY="485.0" prefHeight="6.0" prefWidth="289.0" />
-                  <Button layoutX="51.0" layoutY="511.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="129.0" style="-fx-border-radius: Sem; -fx-border-color: #186CD7; -fx-background-radius: Sem;" text="Cancel" textFill="#186cd7" />
-                  <Button layoutX="198.0" layoutY="511.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #186CD7; -fx-border-radius: 38%;" text="Add" textFill="#fffafa" />
+                  <Button layoutX="51.0" layoutY="511.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="129.0" style="-fx-border-radius: Sem; -fx-border-color: #186CD7; -fx-background-radius: Sem;" text="Cancel" textFill="#186cd7" onAction="#handlebuttonAdd" />
+                  <Button layoutX="198.0" layoutY="511.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #186CD7; -fx-border-radius: 38%;" text="Add" textFill="#fffafa" onAction="#handlebuttonCancel" />
                </children>
             </Pane>
             <Label layoutX="403.0" layoutY="40.0" prefHeight="31.0" prefWidth="222.0" text="Course Appointment">
@@ -90,7 +90,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <DatePicker layoutX="362.0" layoutY="122.0" prefHeight="25.0" prefWidth="277.0" />
+            <DatePicker fx:id="datePicker" layoutX="362.0" layoutY="122.0" prefHeight="25.0" prefWidth="277.0" />
             <Label layoutX="360.0" layoutY="96.0" text="Select your new date for course appointment:">
                <font>
                   <Font size="13.0" />
@@ -103,7 +103,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" layoutX="19.0" layoutY="48.0" prefHeight="39.0" prefWidth="95.0" promptText="00">
+                  <TextField fx:id="hourTf" alignment="CENTER" layoutX="19.0" layoutY="48.0" prefHeight="39.0" prefWidth="95.0" promptText="00">
                      <contextMenu>
                         <ContextMenu>
                            <items>
