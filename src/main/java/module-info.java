@@ -5,6 +5,8 @@ module com.example.ui {
     requires okhttp3;
     requires annotations;
     requires java.net.http;
+    requires org.json;
+    requires com.google.gson;
 
 
     opens com.example.ui to javafx.fxml;
