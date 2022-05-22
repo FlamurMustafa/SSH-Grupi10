@@ -25,11 +25,11 @@ public class addAppointmentController {
     private DatePicker datePicker;
 
     //Date in hour and minutes
-    @FXML
-    private TextField minutesTf,hourTf;
+    //@FXML
+    //private TextField minutesTf,hourTf;
 
     //Date in hour and minutes Integer
-    int hours,minutes;
+    //int hours,minutes;
     @FXML
     private Label popUp;
 
@@ -38,44 +38,20 @@ public class addAppointmentController {
     private Parent root;
 
     @FXML
-    private Label badRequest;
-
+    private TextField room_name,start_time,end_time,class_name;
 
     public void handlebuttonAdd(ActionEvent actionEvent) throws IOException, InterruptedException {
-        /*try{
-            String hour= hourTf.getText();
-            String minute = minutesTf.getText();
-            if(!hour.isBlank() || !minute.isBlank()){
-                if (!hour.matches("(0[89]|1[0-9]|20)")) {
-                    showMessageDialog(null,"The hour should be between 08 am to 08 pm(08-20)!");
-                }
-                else if (!minute.matches("(0[0-9]|[1-5][0-9])")) {
-                    showMessageDialog(null,"Minutes should be betwen 00 and 59!");
-                }
-                else {
-                    hours = Integer.parseInt(hour);
-                    minutes = Integer.parseInt(minute);
-                    System.out.println("The course appointment has been scheduled at "+hours+":"+minutes+".");
-                    showMessageDialog(null, "Add: Successful.");
-                }
-            }
-            else {
-                showMessageDialog(null, "All the fields must be filled!");
-            }
-        }
-        catch(Exception e)
-        {
-            popUp.setText("An error occurred");
-            e.printStackTrace();
-        }*/
         try{
             OkHttpClient client = new OkHttpClient();
             RequestBody formBody = new FormBody.Builder()
-                    .add("email", emailTf.getText())
-                    .add("password", passwordTf.getText())
+                    .add("datePicker", String.valueOf(datePicker.getValue()))
+                    .add("room_name", room_name.getText())
+                    .add("start_time", start_time.getText())
+                    .add("end_time", end_time.getText())
+                    .add("class_name", class_name.getText())
                     .build();
             Request req = new Request.Builder()
-                    .url("http://localhost:3000/user/login")
+                    .url("http://localhost:3000/class/post")
                     .post(formBody)
                     .build();
             Call call = client.newCall(req);
@@ -97,12 +73,12 @@ public class addAppointmentController {
                 stage.show();
             }
             else if (res.code()==400 ||res.code()==404) {
-                badRequest.setText("There was a mistake adding your course credentials.");
+                popUp.setText("There was a mistake adding your course credentials.");
                  }
             }
         catch (Exception e){
 
-                popUp.setText("An error occurred");
+                popUp.setText("An error has occurred");
                 e.printStackTrace();
             }
         }
@@ -110,14 +86,15 @@ public class addAppointmentController {
     public void handlebuttonCancel(ActionEvent actionEvent) {
         try{
             datePicker.getEditor().clear();
-            hourTf.clear();
-            minutesTf.clear();
-
-            System.out.println("All fields have been deleted.");
+            room_name.clear();
+            start_time.clear();
+            end_time.clear();
+            class_name.clear();
+            System.out.println("All fields have been cleared and canceled.");
         }
         catch(Exception e)
         {
-            popUp.setText("An error occurred");
+            popUp.setText("An error has occurred");
             e.printStackTrace();
         }
     }

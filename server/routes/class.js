@@ -14,6 +14,43 @@ classRoute.use(
 );
 
 classRoute.post("/post", Auth, async (req, res) => {
+  const { datePicker, room_name, start_time, end_time, class_name } = req.body;
+  if(req.role_Id===0) return res.status(403).send({"Error":"You can't do this action"});
+  pool.query(
+    `SELECT * from schedule where end_time>"${req.body.start_time}" and start_time<"${req.body.end_time}" and room_id=${req.body.room_name}`,
+    (error, result) => {
+      if (error) return res.sendStatus(500);
+      if (result.length !== 0) {
+        return res.status(409).json({ error: "The schedule is already taken" });
+      }
+      pool.query(
+        `Select class_name from class where lecturer=${req.userId}`,
+        (err, result) => {
+          if (err) return res.status(err);
+          if(result.length===0) res.status(400).send({"error":"User does not have classes"});
+          insertIntoClass(result);
+        }
+      );
+      function insertIntoClass(result) {
+        pool.query(
+          "Insert into schedule(room_id, start_time, end_time, classid) values (?, ?, ?, ?)",
+          [
+            req.body.room_name,
+            req.body.start_time,
+            req.body.end_time,
+            result[0].class_name,
+          ],
+          (result, err) => {
+            if (err.affectedRows!==1) return res.status(500).json({ err });
+            return res.sendStatus(201);
+          }
+        );
+      }
+    }
+  );
+});
+
+/*classRoute.post("/post", Auth, async (req, res) => {
   if(req.role_Id===0) return res.status(403).send({"Error":"You can't do this action"});
   pool.query(
     `SELECT * from schedule where end_time>"${req.body.start_time}" and start_time<"${req.body.end_time}" and room_id=${req.body.room_id}`,
@@ -47,7 +84,7 @@ classRoute.post("/post", Auth, async (req, res) => {
       }
     }
   );
-});
+});*/
 
 classRoute.get("/", Auth, (req, res) => {
   if (req.role_Id === 0) {

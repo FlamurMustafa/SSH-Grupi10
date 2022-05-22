@@ -4,66 +4,41 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
+
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Controller {
-   @FXML
-    private Label cAppointment;
+    //DatePicker
     @FXML
-    private Label sCAppointment;
+    private DatePicker datePicker;
+
+    //Date in hour and minutes
     @FXML
-    private Label sDate;
-    @FXML
-    private Label sTime;
-    @FXML
-    private Label hr;
-    @FXML
-    private Label min;
+    private TextField minutesTf,hourTf;
 
     //Buttons
     @FXML
-    private Button cancelButton;
-    @FXML
-    private Button addButton;
+    private Button cancelButton,addButton;
 
-    //TextFields
-    @FXML
-    private TextField hourField;
-    @FXML
-    private TextField timeField;
+    //Hour
+    int hours,minutes;
 
+    @FXML private Label label;
+    @FXML private Button button;
 
     @FXML
     private void onAddButtonClick(ActionEvent event){
-        try{
-            if (!hourField.getText().isBlank() && !timeField.getText().isBlank()) {
-                showMessageDialog(null, "Add: Successful.");
-            }
-            else {
-                showMessageDialog(null, "All the fields must be filled!");
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
 
-        }
     }
 
     @FXML
     private void onCancelButtonClick(ActionEvent event) {
-        try {
-            //Go to the main/dashboard page
-            //Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
-            //primaryStage.setTitle("Dashboard");
-            //primaryStage.setScene(new Scene(root, 720, 570));
-            //primaryStage.show();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }

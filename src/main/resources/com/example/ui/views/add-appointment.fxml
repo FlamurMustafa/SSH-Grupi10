@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.controllers.addAppointmentController">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.controllers.addAppointmentController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -35,7 +35,7 @@
                   </Label>
                   <ImageView fitHeight="154.0" fitWidth="161.0" focusTraversable="true" layoutX="69.0" layoutY="47.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../Add_Appointment/src/Add_Appointment_Professor.png" />
+                        <Image url="@../../../../../images/Add_Appointment_Professor.png" />
                      </image>
                   </ImageView>
                </children></Pane>
@@ -52,12 +52,12 @@
                   </Pane>
                   <Pane layoutX="198.0" layoutY="195.0" prefHeight="99.0" prefWidth="129.0" style="-fx-background-color: #DFDEDE;">
                      <children>
-                        <Label layoutX="54.0" layoutY="14.0" text="MIN" textFill="#807e7e">
+                        <Label layoutX="42.0" layoutY="14.0" text="UNTIL" textFill="#807e7e">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="minutesTf" alignment="CENTER" layoutX="15.0" layoutY="48.0" prefHeight="39.0" prefWidth="95.0" promptText="00">
+                        <TextField fx:id="end_time" alignment="CENTER" layoutX="15.0" layoutY="48.0" prefHeight="39.0" prefWidth="95.0" promptText="00:00">
                            <contextMenu>
                               <ContextMenu>
                                  <items>
@@ -71,18 +71,38 @@
                         </TextField>
                      </children>
                   </Pane>
-                  <Pane layoutX="199.0" layoutY="321.0" prefHeight="39.0" prefWidth="56.0" style="-fx-background-color: #DFDEDE;">
+                  <Pane layoutX="199.0" layoutY="321.0" prefHeight="39.0" prefWidth="56.0" style="-fx-background-color: #186CD7;">
                      <children>
-                        <Label alignment="CENTER_RIGHT" layoutX="6.0" layoutY="10.0" prefHeight="20.0" prefWidth="44.0" text="10 AM" textFill="#7f7d7d">
+                        <Label alignment="CENTER_RIGHT" layoutX="6.0" layoutY="10.0" prefHeight="20.0" prefWidth="44.0" style="-fx-background-color: #186CD7;" text="10 AM" textFill="#eeeaea">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
-                  <Separator layoutX="51.0" layoutY="485.0" prefHeight="6.0" prefWidth="289.0" />
-                  <Button layoutX="51.0" layoutY="511.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="129.0" style="-fx-border-radius: Sem; -fx-border-color: #186CD7; -fx-background-radius: Sem;" text="Cancel" textFill="#186cd7" onAction="#handlebuttonAdd" />
-                  <Button layoutX="198.0" layoutY="511.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #186CD7; -fx-border-radius: 38%;" text="Add" textFill="#fffafa" onAction="#handlebuttonCancel" />
+                  <Separator layoutX="51.0" layoutY="480.0" prefHeight="6.0" prefWidth="289.0" />
+                  <Button layoutX="51.0" layoutY="562.0" mnemonicParsing="false" onAction="#handlebuttonAdd" prefHeight="39.0" prefWidth="129.0" style="-fx-border-radius: Sem; -fx-border-color: #186CD7; -fx-background-radius: Sem;" text="Cancel" textFill="#186cd7" />
+                  <Button layoutX="198.0" layoutY="562.0" mnemonicParsing="false" onAction="#handlebuttonCancel" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #186CD7; -fx-border-radius: 38%;" text="Add" textFill="#fffafa" />
+                  <Pane layoutX="52.0" layoutY="495.0" prefHeight="56.0" prefWidth="129.0" style="-fx-background-color: #DFDEDE;">
+                     <children>
+                        <Label layoutX="38.0" layoutY="5.0" text="ROOM" textFill="#7f7d7d">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="room_name" layoutX="23.0" layoutY="25.0" prefHeight="25.0" prefWidth="89.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="200.0" layoutY="495.0" prefHeight="56.0" prefWidth="123.0" style="-fx-background-color: #DFDEDE;">
+                     <children>
+                        <Label layoutX="15.0" layoutY="4.0" prefHeight="20.0" prefWidth="95.0" text="CLASS NAME" textFill="#7f7d7d">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="class_name" layoutX="16.0" layoutY="25.0" prefHeight="25.0" prefWidth="89.0" />
+                     </children>
+                  </Pane>
                </children>
             </Pane>
             <Label layoutX="403.0" layoutY="40.0" prefHeight="31.0" prefWidth="222.0" text="Course Appointment">
@@ -98,12 +118,12 @@
             </Label>
             <Pane layoutX="361.0" layoutY="195.0" prefHeight="99.0" prefWidth="129.0" style="-fx-background-color: #DFDEDE;">
                <children>
-                  <Label layoutX="62.0" layoutY="14.0" text="HR" textFill="#7f7d7d">
+                  <Label layoutX="43.0" layoutY="14.0" text="FROM" textFill="#7f7d7d">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="hourTf" alignment="CENTER" layoutX="19.0" layoutY="48.0" prefHeight="39.0" prefWidth="95.0" promptText="00">
+                  <TextField fx:id="start_time" alignment="CENTER" layoutX="19.0" layoutY="48.0" prefHeight="39.0" prefWidth="95.0" promptText="00:00">
                      <contextMenu>
                         <ContextMenu>
                            <items>
@@ -140,9 +160,9 @@
                   </Label>
                </children>
             </Pane>
-            <Pane layoutX="361.0" layoutY="375.0" prefHeight="39.0" prefWidth="56.0" style="-fx-background-color: #DFDEDE #186CD7;">
+            <Pane layoutX="361.0" layoutY="375.0" prefHeight="39.0" prefWidth="56.0" style="-fx-background-color: #186CD7;">
                <children>
-                  <Label layoutX="6.0" layoutY="9.0" prefHeight="20.0" prefWidth="44.0" text="12 AM" textFill="#7f7d7d">
+                  <Label layoutX="6.0" layoutY="9.0" prefHeight="20.0" prefWidth="44.0" text="12 AM" textFill="#fff7f7">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -158,9 +178,9 @@
                   </Label>
                </children>
             </Pane>
-            <Pane layoutX="509.0" layoutY="376.0" prefHeight="39.0" prefWidth="56.0" style="-fx-background-color: #DFDEDE;">
+            <Pane layoutX="509.0" layoutY="376.0" prefHeight="39.0" prefWidth="56.0" style="-fx-background-color: #186CD7;">
                <children>
-                  <Label alignment="CENTER" layoutX="5.0" layoutY="10.0" prefHeight="20.0" prefWidth="44.0" text="2 PM" textFill="#7f7d7d">
+                  <Label alignment="CENTER" layoutX="5.0" layoutY="10.0" prefHeight="20.0" prefWidth="44.0" text="2 PM" textFill="#fcfafa">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -185,9 +205,9 @@
                   </Label>
                </children>
             </Pane>
-            <Pane layoutX="434.0" layoutY="428.0" prefHeight="39.0" prefWidth="56.0" style="-fx-background-color: #DFDEDE;">
+            <Pane layoutX="434.0" layoutY="428.0" prefHeight="39.0" prefWidth="56.0" style="-fx-background-color: #186CD7;">
                <children>
-                  <Label layoutX="14.0" layoutY="10.0" prefHeight="20.0" prefWidth="44.0" text="5 PM" textFill="#7f7d7d">
+                  <Label layoutX="14.0" layoutY="10.0" prefHeight="20.0" prefWidth="44.0" text="5 PM" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
