@@ -15,9 +15,7 @@ import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import com.google.gson.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -86,7 +84,10 @@ public class Schedules implements Initializable {
 
             Call call = client.newCall(req);
             Response res = call.execute();
-            //System.out.println(res);
+
+
+
+            System.out.println(res);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -9,7 +9,7 @@
         <module name="UI" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="17">
       <module name="UI" target="17" />
     </bytecodeTargetLevel>
   </component>

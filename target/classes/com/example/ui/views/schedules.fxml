@@ -25,7 +25,7 @@
                   <Blend />
                </effect>
                <children>
-                  <ImageView disable="true" fitHeight="112.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView disable="false" fitHeight="112.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../images/SeekPng.com_profile-icon-png_9665493.png" />
                      </image>
@@ -58,7 +58,7 @@
                               </Label>
                               <Pane>
                                  <children>
-                                    <TextField alignment="CENTER" disable="true" layoutX="12.0" prefHeight="26.0" prefWidth="160.0" text="Blerim Rexha">
+                                    <TextField fx:id="nameTf" alignment="CENTER" disable="true" layoutX="12.0" prefHeight="26.0" prefWidth="160.0" text="Name Surname">
                                        <font>
                                           <Font name="Microsoft JhengHei Light" size="11.0" />
                                        </font>
@@ -85,7 +85,7 @@
                               </Label>
                               <Pane>
                                  <children>
-                                    <TextField alignment="CENTER" disable="true" layoutX="11.0" prefHeight="26.0" prefWidth="160.0" text="blerim.rexha">
+                                    <TextField fx:id="usernameTf" alignment="CENTER" disable="true" layoutX="11.0" prefHeight="26.0" prefWidth="160.0" text="example.username">
                                        <font>
                                           <Font name="Microsoft JhengHei Light" size="11.0" />
                                        </font>
@@ -112,7 +112,7 @@
                               </Label>
                               <Pane prefHeight="26.0" prefWidth="146.0">
                                  <children>
-                                    <TextField disable="true" prefHeight="26.0" prefWidth="160.0" text="blerim.rexha@uni-pr.edu">
+                                    <TextField fx:id="emailTf" alignment="CENTER" disable="true" prefHeight="26.0" prefWidth="160.0" text="email@example.com">
                                        <font>
                                           <Font name="Microsoft JhengHei Light" size="11.0" />
                                        </font>
