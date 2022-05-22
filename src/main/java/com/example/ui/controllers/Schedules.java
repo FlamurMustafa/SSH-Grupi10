@@ -9,15 +9,21 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import com.google.gson.*;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ResourceBundle;
 
 
@@ -26,6 +32,14 @@ public class Schedules implements Initializable {
     private Scene scene;
     @FXML
     private Button createBtn;
+    @FXML
+    private TextField nameTf;
+
+    @FXML
+    private TextField emailTf;
+
+    @FXML
+    private TextField usernameTf;
 
     public void onCreateClicked(ActionEvent action) {
         try {
@@ -47,14 +61,32 @@ public class Schedules implements Initializable {
         try {
             String token = Token.getToken();
 
-            Request req = new Request.Builder()
+            Request userReq = new Request.Builder()
+                    .url("http://localhost:3000/user")
+                    .header("Authorization", token)
+                    .get()
+                    .build();
+
+            Call userCall = client.newCall(userReq);
+            Response userRes = userCall.execute();
+
+            String strResponse = userRes.body().string();
+
+            JSONObject obj = new JSONObject(strResponse);
+
+            usernameTf.setText(obj.getString("username"));
+            emailTf.setText(obj.getString("email"));
+            nameTf.setText(obj.getString("name"));
+
+           Request req = new Request.Builder()
                     .url("http://localhost:3000/class")
                     .header("Authorization", token)
                     .get()
                     .build();
+
             Call call = client.newCall(req);
             Response res = call.execute();
-            System.out.println(res.body().string());
+            //System.out.println(res);
         }catch (Exception e){
             e.printStackTrace();
         }

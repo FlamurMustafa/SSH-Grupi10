@@ -48,14 +48,14 @@ userRoute.post("/login", async (req, res) => {
 
   try {
     pool.query(
-      "SELECT * FROM user where email = ? or username=?",
-      [email, username],
-      (error, result) => {
-        if (error) return res.status(400).json({ error });
-        if(result.length===0) return res.status(400).json({ error });
-        finishCall(result);
-      }
-    );
+          "SELECT * FROM user where email = ? or username=?",
+          [email, username],
+          (error, result) => {
+            if (error) return res.status(400).json({ error });
+            if(result.length===0) return res.status(400).json({ error });
+            finishCall(result);
+          }
+        );
   } catch (e) {}
   async function finishCall(result) {
     const isMatch = await bcrypt.compare(password, result[0].password);
@@ -79,7 +79,7 @@ userRoute.get("/", Auth, (req, res) => {
       [req.userId],
       (error, result) => {
         if (error) return res.status(400).json({ error });
-        result = JSON.parse(JSON.stringify(result));
+        result = JSON.parse(JSON.stringify(result[0]));
         return res.status(200).json(result);
       }
     );
