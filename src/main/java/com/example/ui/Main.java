@@ -10,10 +10,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         if(Token.getToken()!=null){
-            fxmlLoader = new FXMLLoader(Main.class.getResource("views/Log-in.fxml"));
-
-        }else{
             fxmlLoader = new FXMLLoader(Main.class.getResource("views/schedules.fxml"));
+        }else{
+            fxmlLoader = new FXMLLoader(Main.class.getResource("views/Log-in.fxml"));
         }
 
         Scene scene = new Scene(fxmlLoader.load(), 814, 495);

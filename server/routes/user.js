@@ -73,6 +73,7 @@ userRoute.post("/login", async (req, res) => {
 // })
 
 userRoute.get("/", Auth, (req, res) => {
+
   try {
     pool.query(
       "SELECT username, email, role_id, name FROM user where userid = ?",
