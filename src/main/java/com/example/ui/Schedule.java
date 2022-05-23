@@ -5,11 +5,11 @@ import java.util.Date;
 public class Schedule {
     private Integer scheduleId;
     private Integer roomId;
-    private Date startTime;
-    private Date endTime;
+    private String startTime;
+    private String endTime;
     private Integer classId;
 
-    public Schedule(Integer scheduleId, Integer roomId, Date startTime, Date endTime, Integer classId) {
+    public Schedule(Integer scheduleId, Integer roomId, String startTime, String endTime, Integer classId) {
         this.scheduleId = scheduleId;
         this.roomId = roomId;
         this.startTime = startTime;
@@ -33,19 +33,19 @@ public class Schedule {
         this.roomId = roomId;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

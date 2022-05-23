@@ -21,6 +21,7 @@ import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URL;
@@ -53,10 +54,10 @@ public class Schedules implements Initializable {
     private TableColumn<Schedule, Integer> roomField;
 
     @FXML
-    private TableColumn<Schedule, Date> startTimeField;
+    private TableColumn<Schedule, String> startTimeField;
 
     @FXML
-    private TableColumn<Schedule, Date> endTimeField;
+    private TableColumn<Schedule, String> endTimeField;
 
     @FXML
     private TableColumn<Schedule, Integer> classField;
@@ -90,41 +91,46 @@ public class Schedules implements Initializable {
             Call userCall = client.newCall(userReq);
             Response userRes = userCall.execute();
 
-            String strResponse = userRes.body().string();
+            String strUsrResponse = userRes.body().string();
 
-            JSONObject obj = new JSONObject(strResponse);
+            JSONObject usrObj = new JSONObject(strUsrResponse);
 
-            usernameTf.setText(obj.getString("username"));
-            emailTf.setText(obj.getString("email"));
-            nameTf.setText(obj.getString("name"));
+            usernameTf.setText(usrObj.getString("username"));
+            emailTf.setText(usrObj.getString("email"));
+            nameTf.setText(usrObj.getString("name"));
 
-            Request req = new Request.Builder()
+            Request scReq = new Request.Builder()
                     .url("http://localhost:3000/class")
                     .header("Authorization", token)
                     .get()
                     .build();
 
-            Call call = client.newCall(req);
-            Response res = call.execute();
-            System.out.println(res);
+            Call scCall = client.newCall(scReq);
+            Response scRes = scCall.execute();
 
+            String strScResponse = scRes.body().string();
+
+            JSONArray scheduleArray = new JSONArray(strScResponse);
+            ObservableList<Schedule> schedules = FXCollections.observableArrayList();
+            for(int i=0; i<scheduleArray.length();i++){
+                JSONObject scheduleObject = scheduleArray.getJSONObject(i);
+                schedules.add(new Schedule( scheduleObject.getInt("scheduleid"),
+                                            scheduleObject.getInt("room_id"),
+                                            scheduleObject.getString("start_time"),
+                                            scheduleObject.getString("end_time"),
+                                            scheduleObject.getInt("classid")));
+            }
 
             scheduleField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("scheduleId"));
             roomField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("roomId"));
-            startTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, Date>("startTime"));
-            endTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, Date>("endTime"));
+            startTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("startTime"));
+            endTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("endTime"));
             classField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("classId"));
 
-            tableView.setItems(getSchedules());
+            tableView.setItems(schedules);
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        }
-
-        public ObservableList<Schedule> getSchedules(){
-        ObservableList<Schedule> schedules = FXCollections.observableArrayList();
-        schedules.add(new Schedule(1, 253, new Date(2000, 11, 21), new Date(2012, 10, 21), 32));
-        return schedules;
         }
 }
