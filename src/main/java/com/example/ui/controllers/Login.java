@@ -37,6 +37,32 @@ public class Login {
     private TextField passwordTf;
 
     @FXML
+    public void onLinkClicked(ActionEvent action) throws IOException, InterruptedException{
+
+//        OkHttpClient client = new OkHttpClient();
+//        RequestBody formBody = new FormBody.Builder()
+//                .build();
+//        Request req = new Request.Builder()
+//                .url("http://localhost:3000/user/login")
+//                .post(formBody)
+//                .build();
+//        Call call = client.newCall(req);
+//        Response res = call.execute();
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/com/example/ui/views/sign-up.fxml"));
+            Parent root = loader.load();
+            stage = (Stage) ((Node) action.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     private void onLoginClicked(ActionEvent action) throws IOException, InterruptedException {
 
         try {
