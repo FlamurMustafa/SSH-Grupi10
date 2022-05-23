@@ -166,13 +166,13 @@
                            </font>
                         </Button>
                         <TextField alignment="CENTER" layoutX="50.0" layoutY="14.0" prefHeight="30.0" prefWidth="164.0" promptText="Search" style="-fx-background-color: #ededed;" />
-                        <TableView layoutX="50.0" layoutY="66.0" prefHeight="289.0" prefWidth="475.0">
+                        <TableView fx:id="tableView" layoutX="50.0" layoutY="66.0" prefHeight="289.0" prefWidth="475.0">
                           <columns>
-                            <TableColumn prefWidth="45.0" text="SID" />
-                            <TableColumn prefWidth="108.0" text="Room" />
-                              <TableColumn prefWidth="108.0" text="StartTime" />
-                              <TableColumn prefWidth="108.0" text="EndTime" />
-                              <TableColumn prefWidth="108.0" text="Class" />
+                            <TableColumn fx:id="scheduleField" prefWidth="45.0" text="SID" />
+                            <TableColumn fx:id="roomField" prefWidth="108.0" text="Room" />
+                              <TableColumn fx:id="startTimeField" prefWidth="108.0" text="StartTime" />
+                              <TableColumn fx:id="endTimeField" prefWidth="108.0" text="EndTime" />
+                              <TableColumn fx:id="classField" prefWidth="108.0" text="Class" />
                           </columns>
                         </TableView>
                         <Button layoutX="462.0" layoutY="14.0" minWidth="53.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #286090;" text="DELETE" textFill="WHITE">

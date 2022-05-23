@@ -1,6 +1,9 @@
 package com.example.ui.controllers;
 
+import com.example.ui.Schedule;
 import com.example.ui.Token;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +12,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -17,11 +23,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONObject;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 
@@ -30,6 +33,7 @@ public class Schedules implements Initializable {
     private Scene scene;
     @FXML
     private Button createBtn;
+
     @FXML
     private TextField nameTf;
 
@@ -38,6 +42,24 @@ public class Schedules implements Initializable {
 
     @FXML
     private TextField usernameTf;
+
+    @FXML
+    private TableView<Schedule> tableView;
+
+    @FXML
+    private TableColumn<Schedule, Integer> scheduleField;
+
+    @FXML
+    private TableColumn<Schedule, Integer> roomField;
+
+    @FXML
+    private TableColumn<Schedule, Date> startTimeField;
+
+    @FXML
+    private TableColumn<Schedule, Date> endTimeField;
+
+    @FXML
+    private TableColumn<Schedule, Integer> classField;
 
     public void onCreateClicked(ActionEvent action) {
         try {
@@ -76,7 +98,7 @@ public class Schedules implements Initializable {
             emailTf.setText(obj.getString("email"));
             nameTf.setText(obj.getString("name"));
 
-           Request req = new Request.Builder()
+            Request req = new Request.Builder()
                     .url("http://localhost:3000/class")
                     .header("Authorization", token)
                     .get()
@@ -84,12 +106,25 @@ public class Schedules implements Initializable {
 
             Call call = client.newCall(req);
             Response res = call.execute();
-
-
-
             System.out.println(res);
+
+
+            scheduleField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("scheduleId"));
+            roomField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("roomId"));
+            startTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, Date>("startTime"));
+            endTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, Date>("endTime"));
+            classField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("classId"));
+
+            tableView.setItems(getSchedules());
+
         }catch (Exception e){
             e.printStackTrace();
         }
+        }
+
+        public ObservableList<Schedule> getSchedules(){
+        ObservableList<Schedule> schedules = FXCollections.observableArrayList();
+        schedules.add(new Schedule(1, 253, new Date(2000, 11, 21), new Date(2012, 10, 21), 32));
+        return schedules;
         }
 }
