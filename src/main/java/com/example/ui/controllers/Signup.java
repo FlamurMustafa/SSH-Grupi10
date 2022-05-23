@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 public class Signup implements Iterable {
     private Stage stage;
@@ -62,10 +63,24 @@ public class Signup implements Iterable {
         String mnumber = this.mnumberTf.getText();
         String email = this.emailTf.getText();
         String password = this.passwordTf.getText();
+        String emailRegexp= "[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+        String numberRegexp="^^\\+[383]+\\-[4-6]{1}[0-9]{1}+\\-[0-9]{3}+\\-[0-9]{3}$";
+        String passwordRegexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{8,16}$";
 
-        if (name.isEmpty() || password.isEmpty() || mnumber.isEmpty() || mnumber.isEmpty()) {
+        Pattern pattern = Pattern.compile(emailRegexp);
+        Pattern pattern1=Pattern.compile(numberRegexp);
+        Pattern pattern2=Pattern.compile(passwordRegexp);
+
+        if (name.isEmpty() || password.isEmpty() || email.isEmpty() || mnumber.isEmpty()) {
             badSignup.setText("Pleas fill the text field");
-        } else {
+        }
+        else if(!pattern.matcher(email).matches()){
+            badSignup.setText("Please write vaild email ");
+        }else if(!pattern1.matcher(mnumber).matches()) {
+            badSignup.setText("Please write valid number");
+        }else if(!pattern2.matcher(password).matches()){
+            badSignup.setText("Password must contain at least 8 characters.\n");
+        }else {
             try {
                 OkHttpClient client = new OkHttpClient();
                 RequestBody formBody = new FormBody.Builder()

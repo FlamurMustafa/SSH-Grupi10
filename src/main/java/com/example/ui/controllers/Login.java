@@ -65,43 +65,47 @@ public class Login {
     @FXML
     private void onLoginClicked(ActionEvent action) throws IOException, InterruptedException {
 
-        try {
-            OkHttpClient client = new OkHttpClient();
-            RequestBody formBody = new FormBody.Builder()
-                    .add("email", emailTf.getText())
-                    .add("password", passwordTf.getText())
-                    .build();
+        if (emailTf.getText().isEmpty() || passwordTf.getText().isEmpty()) {
+            badRequest.setText("Please fill the field");
+        } else {
+            try {
+                OkHttpClient client = new OkHttpClient();
+                RequestBody formBody = new FormBody.Builder()
+                        .add("email", emailTf.getText())
+                        .add("password", passwordTf.getText())
+                        .build();
 
-            Request req = new Request.Builder()
-                    .url("http://localhost:3000/user/login")
-                    .post(formBody)
-                    .build();
-            Call call = client.newCall(req);
-            Response res = call.execute();
-            if (res.isSuccessful()) {
-                String token = res.body().string();
-                File yourFile = new File("src/main/resources/files/token.txt");
-                yourFile.createNewFile();
-                FileOutputStream fl = new FileOutputStream(yourFile, true);
-                fl.write(token.getBytes(StandardCharsets.UTF_8));
-                fl.close();
+                Request req = new Request.Builder()
+                        .url("http://localhost:3000/user/login")
+                        .post(formBody)
+                        .build();
+                Call call = client.newCall(req);
+                Response res = call.execute();
+                if (res.isSuccessful()) {
+                    String token = res.body().string();
+                    File yourFile = new File("src/main/resources/files/token.txt");
+                    yourFile.createNewFile();
+                    FileOutputStream fl = new FileOutputStream(yourFile, true);
+                    fl.write(token.getBytes(StandardCharsets.UTF_8));
+                    fl.close();
 
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/com/example/ui/views/schedules.fxml"));
-                Parent root = loader.load();
-                stage = (Stage) ((Node) action.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/com/example/ui/views/schedules.fxml"));
+                    Parent root = loader.load();
+                    stage = (Stage) ((Node) action.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else if (res.code() == 400 || res.code() == 404) {
+                    badRequest.setText("There was a mistake in your credentials");
+                }
+            } catch (Exception e) {
+                emailTf.clear();
+                passwordTf.clear();
+                popUp.setText("An error occurred");
+                e.printStackTrace();
             }
-            else if(res.code()==400 ||res.code()==404) {
-            badRequest.setText("There was a mistake in your credentials");
-            }
-        } catch (Exception e){
-            popUp.setText("An error occurred");
-            e.printStackTrace();
+
         }
-
     }
-
 }
