@@ -54,7 +54,7 @@ classRoute.get("/", Auth, (req, res) => {
   if (req.role_Id === 0) {
     //fetch student's classes
     pool.query(
-      "select scheduleid, room_id, start_time, end_time, classid from schedule join class on schedule.classid = class.classid join `student-classes` on `student-classes`.class_classid = class.classid join user on user.userid = `student-classes`.user_userid where user.userid = ?;",
+      "select scheduleid, room_id, start_time, end_time, class.classid from schedule join class on schedule.classid = class.classid join `student-classes` on `student-classes`.class_classid = class.classid join user on user.userid = `student-classes`.user_userid where user.userid = ? group by scheduleid;",
       [req.userId],
       (errorq, result) => {
         if (errorq) res.status(500).send({ errorq });
@@ -63,7 +63,7 @@ classRoute.get("/", Auth, (req, res) => {
     );
   } else {
     pool.query(
-      "select scheduleid, room_id, start_time, end_time, classid from schedule "+
+      "select scheduleid, room_id, start_time, end_time classid from schedule "+
       +" join class on schedule.classid = class.classid "+
      +" where class.lecturer = ?",
       [req.userId],
