@@ -72,7 +72,7 @@ public class Signup implements Iterable {
         Pattern pattern2=Pattern.compile(passwordRegexp);
 
         if (name.isEmpty() || password.isEmpty() || email.isEmpty() || mnumber.isEmpty()) {
-            badSignup.setText("Pleas fill the text field");
+            badSignup.setText("Please fill the text field");
         }
         else if(!pattern.matcher(email).matches()){
             badSignup.setText("Please write vaild email ");
