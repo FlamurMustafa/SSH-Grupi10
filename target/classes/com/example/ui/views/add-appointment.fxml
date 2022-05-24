@@ -90,7 +90,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="19.0" layoutY="25.0" prefHeight="25.0" prefWidth="89.0" />
+                        <TextField fx:id="room_name" layoutX="19.0" layoutY="25.0" prefHeight="25.0" prefWidth="89.0" />
                      </children>
                   </Pane>
                   <Pane layoutX="200.0" layoutY="495.0" prefHeight="56.0" prefWidth="123.0" style="-fx-background-color: #DFDEDE;">
@@ -100,7 +100,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="16.0" layoutY="25.0" prefHeight="25.0" prefWidth="89.0" />
+                        <TextField fx:id="class_name" layoutX="16.0" layoutY="25.0" prefHeight="25.0" prefWidth="89.0" />
                      </children>
                   </Pane>
                </children>
