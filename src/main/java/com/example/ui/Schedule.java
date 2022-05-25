@@ -7,14 +7,14 @@ public class Schedule {
     private Integer roomId;
     private String startTime;
     private String endTime;
-    private Integer classId;
+    private String className;
 
-    public Schedule(Integer scheduleId, Integer roomId, String startTime, String endTime, Integer classId) {
+    public Schedule(Integer scheduleId, Integer roomId, String startTime, String endTime, String className) {
         this.scheduleId = scheduleId;
         this.roomId = roomId;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.classId = classId;
+        this.className = className;
     }
 
     public int getScheduleId() {
@@ -49,11 +49,11 @@ public class Schedule {
         this.endTime = endTime;
     }
 
-    public int getClassId() {
-        return classId;
+    public String getClassId() {
+        return className;
     }
 
-    public void setClassId(int classId) {
-        this.classId = classId;
+    public void setClassId(String classId) {
+        this.className = className;
     }
 }

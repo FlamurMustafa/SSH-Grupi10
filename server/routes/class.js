@@ -63,9 +63,7 @@ classRoute.get("/", Auth, (req, res) => {
     );
   } else {
     pool.query(
-      "select scheduleid, room_id, start_time, end_time classid from schedule "+
-      +" join class on schedule.classid = class.classid "+
-     +" where class.lecturer = ?",
+      "select scheduleid, room_id, start_time, end_time, class_name from schedule join class on schedule.classid = class.classid where class.lecturer = ?",
       [req.userId],
       (errorq, resultq) => {
         if (errorq) return res.status(500).send(errorq);
