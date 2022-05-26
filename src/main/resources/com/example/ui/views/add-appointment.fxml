@@ -38,6 +38,7 @@
                         <Image url="@../../../../../images/Add_Appointment_Professor.png" />
                      </image>
                   </ImageView>
+                  <Button fx:id="back" layoutX="14.0" layoutY="576.0" onAction="#backToSchedules" mnemonicParsing="false" text="&lt;" />
                </children></Pane>
             <Pane layoutX="309.0" prefHeight="615.0" prefWidth="411.0">
                <children>

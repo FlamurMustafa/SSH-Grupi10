@@ -5,10 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +35,7 @@ public class Signup implements Iterable {
     private TextField nameTf;
 
     @FXML
-    private TextField mnumberTf;
+    private TextField usernameTf;
 
     @FXML
     private TextField emailTf;
@@ -48,6 +45,10 @@ public class Signup implements Iterable {
 
     @FXML
     private Hyperlink link;
+
+    @FXML
+    private CheckBox professorCB;
+
 
 
     @NotNull
@@ -60,34 +61,33 @@ public class Signup implements Iterable {
 
     public void onSignupClicked(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
         String name = this.nameTf.getText();
-        String mnumber = this.mnumberTf.getText();
+        String username = this.usernameTf.getText();
         String email = this.emailTf.getText();
         String password = this.passwordTf.getText();
         String emailRegexp= "[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
-        String numberRegexp="^^\\+[383]+\\-[4-6]{1}[0-9]{1}+\\-[0-9]{3}+\\-[0-9]{3}$";
+        //String numberRegexp="^^\\+[383]+\\-[4-6]{1}[0-9]{1}+\\-[0-9]{3}+\\-[0-9]{3}$";
         String passwordRegexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{8,16}$";
+        String isProfessor = "0";
+        if(professorCB.isSelected())
+            isProfessor = "1";
 
         Pattern pattern = Pattern.compile(emailRegexp);
-        Pattern pattern1=Pattern.compile(numberRegexp);
         Pattern pattern2=Pattern.compile(passwordRegexp);
 
-        if (name.isEmpty() || password.isEmpty() || email.isEmpty() || mnumber.isEmpty()) {
-            badSignup.setText("Please fill the text field");
+        if (name.isEmpty() || password.isEmpty() || email.isEmpty() || username.isEmpty()) {
+            badSignup.setText("Please fill all the text fields");
         }
         else if(!pattern.matcher(email).matches()){
             badSignup.setText("Please write vaild email ");
-        }else if(!pattern1.matcher(mnumber).matches()) {
-            badSignup.setText("Please write valid number");
-        }else if(!pattern2.matcher(password).matches()){
-            badSignup.setText("Password must contain at least 8 characters.\n");
         }else {
             try {
                 OkHttpClient client = new OkHttpClient();
                 RequestBody formBody = new FormBody.Builder()
                         .add("name", name)
-                        .add("mobileNumber", mnumber)
+                        .add("username", username)
                         .add("email", email)
                         .add("password", password)
+                        .add("role_id", isProfessor)
                         .build();
 
                 Request req = new Request.Builder()
@@ -98,15 +98,8 @@ public class Signup implements Iterable {
                 Call call = client.newCall(req);
                 Response res = call.execute();
                 if (res.isSuccessful()) {
-                    String token = res.body().string();
-                    File yourFile = new File("src/main/resources/files/token.txt");
-                    yourFile.createNewFile();
-                    FileOutputStream fl = new FileOutputStream(yourFile, true);
-                    fl.write(token.getBytes(StandardCharsets.UTF_8));
-                    fl.close();
-
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/com/example/ui/views/schedules.fxml"));
+                    loader.setLocation(getClass().getResource("/com/example/ui/views/Log-in.fxml"));
                     Parent root = loader.load();
                     stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                     scene = new Scene(root);

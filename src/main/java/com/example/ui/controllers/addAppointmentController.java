@@ -93,6 +93,15 @@ public class addAppointmentController {
             }
         }
 
+    public void backToSchedules(ActionEvent a) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/com/example/ui/views/schedules.fxml"));
+        Parent root = loader.load();
+        stage = (Stage) ((Node) a.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public void handlebuttonCancel(ActionEvent actionEvent) {
         try{
