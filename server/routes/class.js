@@ -16,7 +16,7 @@ classRoute.use(
 classRoute.post("/post", Auth, async (req, res) => {
   if(req.role_Id===0) return res.status(403).send({"Error":"You can't do this action"});
   pool.query(
-    `SELECT * from schedule where end_time>"${req.body.start_time}" and start_time<"${req.body.end_time}" and room_id=${req.body.room_id}`,
+    `SELECT * from schedule where end_time>"2022-05-27 13:00:00" and start_time<"2022-05-27 15:00:00" and room_id=3;`,
     (error, result) => {
       if (error) return res.sendStatus(500);
       if (result.length !== 0) {

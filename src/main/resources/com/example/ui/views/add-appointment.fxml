@@ -81,8 +81,8 @@
                      </children>
                   </Pane>
                   <Separator layoutX="51.0" layoutY="480.0" prefHeight="6.0" prefWidth="289.0" />
-                  <Button layoutX="51.0" layoutY="562.0" mnemonicParsing="false" onAction="#handlebuttonAdd" prefHeight="39.0" prefWidth="129.0" style="-fx-border-radius: Sem; -fx-border-color: #186CD7; -fx-background-radius: Sem;" text="Cancel" textFill="#186cd7" />
-                  <Button layoutX="198.0" layoutY="562.0" mnemonicParsing="false" onAction="#handlebuttonCancel" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #186CD7; -fx-border-radius: 38%;" text="Add" textFill="#fffafa" />
+                  <Button layoutX="51.0" layoutY="562.0" mnemonicParsing="false" onAction="#handlebuttonAdd" prefHeight="39.0" prefWidth="129.0" style="-fx-border-radius: Sem; -fx-border-color: #186CD7; -fx-background-radius: Sem;" text="Add" textFill="#186cd7" />
+                  <Button layoutX="198.0" layoutY="562.0" mnemonicParsing="false" onAction="#handlebuttonCancel" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #186CD7; -fx-border-radius: 38%;" text="Cancel" textFill="#fffafa" />
                   <Pane layoutX="54.0" layoutY="495.0" prefHeight="56.0" prefWidth="123.0" style="-fx-background-color: #DFDEDE;">
                      <children>
                         <Label layoutX="38.0" layoutY="5.0" text="ROOM" textFill="#7f7d7d">
