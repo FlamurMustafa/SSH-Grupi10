@@ -43,6 +43,18 @@ userRoute.post("/signup", async (req, res) => {
   }
 });
 
+userRoute.get("/others", Auth, (req, res)=>{
+  try{
+    pool.query("Select userid, username from user", (response, error)=>{
+      if(error) return res.send(error);
+      res.send(response);
+    })
+  }catch(e){
+    console.log(e);
+  }
+});
+
+
 userRoute.post("/login", async (req, res) => {
   let { email, username, password } = req.body;
 
