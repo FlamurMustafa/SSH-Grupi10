@@ -49,10 +49,7 @@ public class Signup implements Iterable {
     @FXML
     private CheckBox professorCB;
 
-
-
     @NotNull
-
 
     @Override
     public Iterator iterator() {
@@ -129,41 +126,3 @@ public class Signup implements Iterable {
         }
     }
 }
-//            OkHttpClient client = new OkHttpClient().newBuilder().build();
-//
-//            MediaType mediaType = MediaType.parse("application/json");
-//            RequestBody body = RequestBody.create(mediaType, "{\n "
-//                    + "\"nameTf\":\"" + nameTf + "\","
-//                    + "\n\"password\":\"" + passwordTf +
-//                    "\n\"email\":\"" + emailTf+
-//                    "\n\"mnumberTf\":\"" + mnumberTf+"\"\n}");
-//
-//            Request request = new Request.Builder()
-//                    .url("http://localhost:3000/user/signup")
-//                    .method("POST", body)
-//                    .build();
-//
-//            Response response = client.newCall(request).execute();
-//
-//            if (response.code() == 201) {
-//                goToLogin();
-//            } else if (response.code() == 409) {
-//                badSignup.setText("The user alredy exists");
-//            }
-//        }
-//    }
-//    private void goToLogin() throws IOException{
-//        Stage stage=(Stage) link.getScene().getWindow();
-//        stage.close();
-//
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(getClass().getResource("/com/example/ui/views/schedules.fxml"));
-//        Parent root = loader.load();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-//    }
-//    public void onLinkClicked() throws IOException{
-//        goToLogin();
-//    }
-

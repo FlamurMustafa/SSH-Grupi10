@@ -27,7 +27,7 @@
             </Button>
             <Label layoutX="242.0" layoutY="435.0" prefHeight="10.0" prefWidth="190.0" text="If you already have an account? " />
             <Hyperlink fx:id="urlLogin" layoutX="409.0" layoutY="432.0" onAction="#onLinkClicked" prefHeight="23.0" prefWidth="82.0" text="Login Now" textFill="DARKORANGE" />
-            <Label fx:id="badSignup" layoutX="92.0" layoutY="337.0" prefHeight="35.0" prefWidth="319.0" textFill="red" />
+            <Label fx:id="badSignup" layoutX="213.0" layoutY="337.0" prefHeight="35.0" prefWidth="198.0" textFill="red" />
             <TextField fx:id="nameTf" layoutX="91.0" layoutY="57.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
             <TextField fx:id="usernameTf" layoutX="90.0" layoutY="136.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
             <TextField fx:id="emailTf" layoutX="92.0" layoutY="214.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
