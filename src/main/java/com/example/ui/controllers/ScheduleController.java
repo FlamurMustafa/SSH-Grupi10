@@ -11,16 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,8 +28,6 @@ import java.util.ResourceBundle;
 public class ScheduleController implements Initializable {
     private Stage stage;
     private Scene scene;
-    @FXML
-    private Button createBtn;
 
     @FXML
     private TextField nameTf;
@@ -62,6 +56,10 @@ public class ScheduleController implements Initializable {
     @FXML
     private TableColumn<Schedule, String> classField;
 
+    private String token;
+
+    private OkHttpClient client;
+
     public void onCreateClicked(ActionEvent action) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -71,47 +69,48 @@ public class ScheduleController implements Initializable {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        OkHttpClient client = new OkHttpClient();
+        client = new OkHttpClient();
         try {
-            String token = Token.getToken();
+            token = Token.getToken();
 
             getUserCall(client, token);
 
             getSchedules(client, token);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        }
+    }
 
     private void getSchedules(OkHttpClient client, String token) throws IOException {
-        Request scReq = new Request.Builder()
+        Request request = new Request.Builder()
                 .url("http://localhost:3000/class")
                 .header("Authorization", token)
                 .get()
                 .build();
 
-        Call scCall = client.newCall(scReq);
-        Response scRes = scCall.execute();
+        Call call = client.newCall(request);
+        Response response = call.execute();
 
-        String strScResponse = scRes.body().string();
+        String scheduleString = response.body().string();
 
-        JSONArray scheduleArray = new JSONArray(strScResponse);
-        ObservableList<Schedule> schedules = FXCollections.observableArrayList();
-        for(int i=0; i<scheduleArray.length();i++){
+        JSONArray scheduleArray = new JSONArray(scheduleString);
+        ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
+
+        for (int i = 0; i < scheduleArray.length(); i++) {
             JSONObject scheduleObject = scheduleArray.getJSONObject(i);
-            schedules.add(new Schedule( scheduleObject.getInt("scheduleid"),
-                                        scheduleObject.getInt("room_id"),
-                                        scheduleObject.getString("start_time"),
-                                        scheduleObject.getString("end_time"),
-                                        scheduleObject.getString("class_name")));
+            scheduleList.add(new Schedule(scheduleObject.getInt("scheduleid"),
+                    scheduleObject.getInt("room_id"),
+                    scheduleObject.getString("start_time"),
+                    scheduleObject.getString("end_time"),
+                    scheduleObject.getString("class_name")));
         }
 
         scheduleField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("scheduleId"));
@@ -120,25 +119,43 @@ public class ScheduleController implements Initializable {
         endTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("endTime"));
         classField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("classId"));
 
-        tableView.setItems(schedules);
+        tableView.setItems(scheduleList);
     }
 
     private void getUserCall(OkHttpClient client, String token) throws IOException {
-        Request userReq = new Request.Builder()
+        Request request = new Request.Builder()
                 .url("http://localhost:3000/user")
                 .header("Authorization", token)
                 .get()
                 .build();
 
-        Call userCall = client.newCall(userReq);
-        Response userRes = userCall.execute();
+        Call call = client.newCall(request);
+        Response response = call.execute();
 
-        String strUsrResponse = userRes.body().string();
+        String userString = response.body().string();
 
-        JSONObject usrObj = new JSONObject(strUsrResponse);
+        JSONObject user = new JSONObject(userString);
 
-        usernameTf.setText(usrObj.getString("username"));
-        emailTf.setText(usrObj.getString("email"));
-        nameTf.setText(usrObj.getString("name"));
+        usernameTf.setText(user.getString("username"));
+        emailTf.setText(user.getString("email"));
+        nameTf.setText(user.getString("name"));
+    }
+
+    public void onDeleteClicked(ActionEvent action) {
+        Schedule schedule = tableView.getSelectionModel().getSelectedItems().get(0);
+        try {
+            Request request = new Request.Builder()
+                    .url("http://localhost:3000/class?scheduleid=" + schedule.getScheduleId())
+                    .header("Authorization", token)
+                    .delete()
+                    .build();
+
+            Call call = client.newCall(request);
+            call.execute();
+
+            getSchedules(client, token);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -175,7 +175,7 @@
                               <TableColumn fx:id="classField" prefWidth="108.0" text="Class" />
                           </columns>
                         </TableView>
-                        <Button layoutX="462.0" layoutY="14.0" minWidth="53.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #286090;" text="DELETE" textFill="WHITE">
+                        <Button fx:id="deleteBtn" layoutX="462.0" layoutY="14.0" minWidth="53.0" mnemonicParsing="false" onAction="#onDeleteClicked" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #286090;" text="DELETE" textFill="WHITE">
                            <font>
                               <Font name="Arial" size="11.0" />
                            </font>
