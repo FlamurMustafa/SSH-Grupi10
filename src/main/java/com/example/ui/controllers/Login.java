@@ -73,6 +73,12 @@ public class Login {
                 Call call = client.newCall(req);
                 Response res = call.execute();
                 if (res.isSuccessful()) {
+                    String token = res.body().string();
+                    File yourFile = new File("src/main/resources/files/token.txt");
+                    yourFile.createNewFile();
+                    FileOutputStream fl = new FileOutputStream(yourFile, true);
+                    fl.write(token.getBytes(StandardCharsets.UTF_8));
+                    fl.close();
 //
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/com/example/ui/views/schedules.fxml"));
