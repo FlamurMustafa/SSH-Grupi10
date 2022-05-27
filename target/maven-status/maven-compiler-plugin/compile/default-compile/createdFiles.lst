@@ -1,9 +1,0 @@
-com\example\ui\Schedule.class
-com\example\ui\Token.class
-com\example\ui\controllers\addAppointmentController.class
-com\example\ui\controllers\Controller.class
-com\example\ui\controllers\Signup.class
-com\example\ui\controllers\Schedules.class
-module-info.class
-com\example\ui\Main.class
-com\example\ui\controllers\Login.class
