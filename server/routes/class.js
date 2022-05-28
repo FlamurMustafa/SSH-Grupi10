@@ -14,7 +14,7 @@ classRoute.use(
 );
 
 classRoute.post("/post", Auth, async (req, res) => {
-  if(req.role_Id===0) return res.status(403).send({"Error":"You can't do this action"});
+  if(req.role_Id===0) return res.status(401).send({"Error":"You can't do this action"});
   pool.query(
     `SELECT * from schedule where end_time>"2022-05-27 13:00:00" and start_time<"2022-05-27 15:00:00" and room_id=3;`,
     (error, result) => {
@@ -54,7 +54,7 @@ classRoute.get("/", Auth, (req, res) => {
   if (req.role_Id === 0) {
     //fetch student's classes
     pool.query(
-      "select scheduleid, room_id, start_time, end_time, class.classid from schedule join class on schedule.classid = class.classid join `student-classes` on `student-classes`.class_classid = class.classid join user on user.userid = `student-classes`.user_userid where user.userid = ? group by scheduleid;",
+      "select scheduleid, room_id, start_time, end_time, class.class_name from schedule join class on schedule.classid = class.classid join `student-classes` on `student-classes`.class_classid = class.classid join user on user.userid = `student-classes`.user_userid where user.userid = ? group by scheduleid;",
       [req.userId],
       (errorq, result) => {
         if (errorq) res.status(500).send({ errorq });
