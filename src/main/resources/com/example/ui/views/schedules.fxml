@@ -25,7 +25,7 @@
                   <Blend />
                </effect>
                <children>
-                  <ImageView disable="false" fitHeight="112.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView depthTest="ENABLE" fitHeight="112.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../images/SeekPng.com_profile-icon-png_9665493.png" />
                      </image>
