@@ -20,7 +20,7 @@
             <Label layoutX="92.0" layoutY="113.0" text="Username" />
             <Label layoutX="93.0" layoutY="190.0" text="Email" />
             <Label layoutX="90.0" layoutY="271.0" text="Password" />
-            <Button fx:id="signUp" layoutX="175.0" layoutY="379.0" mnemonicParsing="false" onAction="#onSignupClicked" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #FF8C00; -fx-background-radius: 10;" text="Sign Up">
+            <Button fx:id="signUp" defaultButton="true" layoutX="175.0" layoutY="379.0" mnemonicParsing="false" onAction="#onSignupClicked" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #FF8C00; -fx-background-radius: 10;" text="Sign Up">
                <font>
                   <Font size="14.0" />
                </font>

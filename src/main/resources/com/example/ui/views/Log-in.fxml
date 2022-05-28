@@ -18,7 +18,7 @@
             <Label layoutX="85.0" layoutY="31.0" prefHeight="35.0" prefWidth="133.0" text="Email or username" />
             <Label layoutX="86.0" layoutY="123.0" text="Password" />
             <TextField fx:id="emailTf" layoutX="85.0" layoutY="66.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
-            <Button fx:id="loginBtn" layoutX="169.0" layoutY="225.0" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #FF8C00; -fx-background-radius: 10;" text="Log In" textFill="#f4eeee">
+            <Button fx:id="loginBtn" defaultButton="true" layoutX="169.0" layoutY="225.0" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #FF8C00; -fx-background-radius: 10;" text="Log In" textFill="#f4eeee">
                <font>
                   <Font size="14.0" />
                </font>

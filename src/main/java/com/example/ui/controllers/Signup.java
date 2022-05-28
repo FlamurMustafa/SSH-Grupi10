@@ -63,7 +63,7 @@ public class Signup implements Iterable {
         String password = this.passwordTf.getText();
         String emailRegexp= "[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
         //String numberRegexp="^^\\+[383]+\\-[4-6]{1}[0-9]{1}+\\-[0-9]{3}+\\-[0-9]{3}$";
-        String passwordRegexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{8,16}$";
+        String passwordRegexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,16}.*$";
         String isProfessor = "0";
         if(professorCB.isSelected())
             isProfessor = "1";
@@ -75,8 +75,12 @@ public class Signup implements Iterable {
             badSignup.setText("Please fill all the text fields");
         }
         else if(!pattern.matcher(email).matches()){
-            badSignup.setText("Please write vaild email ");
-        }else {
+           badSignup.setText("Please write vaild email ");
+        }
+      //  else if(!pattern2.matcher(email).matches()) {
+      //     badSignup.setText("Please write vaild password ");
+      //  }
+        else {
             try {
                 OkHttpClient client = new OkHttpClient();
                 RequestBody formBody = new FormBody.Builder()
