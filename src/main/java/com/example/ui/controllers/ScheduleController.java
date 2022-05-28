@@ -1,5 +1,6 @@
 package com.example.ui.controllers;
 
+import com.example.ui.AlertBox;
 import com.example.ui.Schedule;
 import com.example.ui.Token;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -56,9 +58,13 @@ public class ScheduleController implements Initializable {
     @FXML
     private TableColumn<Schedule, String> classField;
 
+    @FXML
+    private Button deleteBtn;
+
     private String token;
 
     private OkHttpClient client;
+
 
     public void onCreateClicked(ActionEvent action) {
         try {
@@ -69,6 +75,7 @@ public class ScheduleController implements Initializable {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,6 +90,7 @@ public class ScheduleController implements Initializable {
             getUserCall(client, token);
 
             getSchedules(client, token);
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,21 +149,28 @@ public class ScheduleController implements Initializable {
         nameTf.setText(user.getString("name"));
     }
 
-    public void onDeleteClicked(ActionEvent action) {
-        Schedule schedule = tableView.getSelectionModel().getSelectedItems().get(0);
-        try {
+    public void onDeleteClicked(ActionEvent action) throws IOException{
+        ObservableList<Schedule> scheduleList = tableView.getSelectionModel().getSelectedItems();
+
+        if(scheduleList.isEmpty()){
+            AlertBox.display("WARNING", "There is no data selected!");
+        }
+        else{
             Request request = new Request.Builder()
-                    .url("http://localhost:3000/class?scheduleid=" + schedule.getScheduleId())
+                    .url("http://localhost:3000/class?scheduleid=" + scheduleList.get(0).getScheduleId())
                     .header("Authorization", token)
                     .delete()
                     .build();
 
             Call call = client.newCall(request);
-            call.execute();
+            Response res = call.execute();
 
-            getSchedules(client, token);
-        } catch (Exception e) {
-            e.printStackTrace();
+           if(res.isSuccessful()){
+                getSchedules(client, token);
+            }
+            else if(res.code()==500){
+                AlertBox.display("You are a student", "You DO NOT have the RIGHTS to DELETE schedules!");
+            }
         }
     }
 }

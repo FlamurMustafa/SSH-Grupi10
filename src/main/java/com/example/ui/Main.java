@@ -11,6 +11,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         if(Token.getToken()!=null){
             fxmlLoader = new FXMLLoader(Main.class.getResource("views/schedules.fxml"));
+            stage.setMinWidth(814);
         }else{
             fxmlLoader = new FXMLLoader(Main.class.getResource("views/Log-in.fxml"));
         }
