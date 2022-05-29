@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -58,26 +57,30 @@ public class ScheduleController implements Initializable {
     @FXML
     private TableColumn<Schedule, String> classField;
 
-    @FXML
-    private Button deleteBtn;
-
     private String token;
 
     private OkHttpClient client;
 
+    private Integer roleID;
+
 
     public void onCreateClicked(ActionEvent action) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/com/example/ui/views/add-appointment.fxml"));
-            Parent root = loader.load();
-            stage = (Stage) ((Node) action.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+        if(roleID==1){
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/com/example/ui/views/add-appointment.fxml"));
+                Parent root = loader.load();
+                stage = (Stage) ((Node) action.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            AlertBox.display("You are a student", "You DO NOT have the RIGHTS to INSERT schedules!");
         }
     }
 
@@ -147,6 +150,8 @@ public class ScheduleController implements Initializable {
         usernameTf.setText(user.getString("username"));
         emailTf.setText(user.getString("email"));
         nameTf.setText(user.getString("name"));
+        roleID = user.getInt("role_id");
+
     }
 
     public void onDeleteClicked(ActionEvent action) throws IOException{
@@ -168,7 +173,7 @@ public class ScheduleController implements Initializable {
            if(res.isSuccessful()){
                 getSchedules(client, token);
             }
-            else if(res.code()==500){
+            else if(res.code()==401){
                 AlertBox.display("You are a student", "You DO NOT have the RIGHTS to DELETE schedules!");
             }
         }
@@ -182,6 +187,11 @@ public class ScheduleController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
         Token.deleteToken();
+    }
+
+    public void onSearchClicked(ActionEvent event) throws IOException{
+
     }
 }

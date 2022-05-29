@@ -6,39 +6,46 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="545.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.controllers.Signup">
+<AnchorPane maxHeight="495.0" prefHeight="814.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.controllers.Signup">
    <children>
       <HBox prefHeight="80.0" prefWidth="501.0" />
-      <Pane layoutX="3.0" layoutY="71.0" prefHeight="479.0" prefWidth="498.0">
+      <Pane layoutX="3.0" layoutY="31.0" prefHeight="107.0" prefWidth="814.0">
          <children>
-            <Label layoutX="92.0" layoutY="27.0" text="Name" />
-            <Label layoutX="92.0" layoutY="113.0" text="Username" />
-            <Label layoutX="93.0" layoutY="190.0" text="Email" />
-            <Label layoutX="90.0" layoutY="271.0" text="Password" />
-            <Button fx:id="signUp" defaultButton="true" layoutX="175.0" layoutY="379.0" mnemonicParsing="false" onAction="#onSignupClicked" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #FF8C00; -fx-background-radius: 10;" text="Sign Up">
+            <Label layoutX="447.0" layoutY="53.0" text="Name" />
+            <Label layoutX="448.0" layoutY="122.0" text="Username" />
+            <Label layoutX="448.0" layoutY="191.0" text="Email" />
+            <Label layoutX="450.0" layoutY="256.0" text="Password" />
+            <Button fx:id="signUp" defaultButton="true" layoutX="444.0" layoutY="354.0" mnemonicParsing="false" onAction="#onSignupClicked" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #286090; -fx-background-radius: 10;" text="Sign Up" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Label layoutX="242.0" layoutY="435.0" prefHeight="10.0" prefWidth="190.0" text="If you already have an account? " />
-            <Hyperlink fx:id="urlLogin" layoutX="409.0" layoutY="432.0" onAction="#onLinkClicked" prefHeight="23.0" prefWidth="82.0" text="Login Now" textFill="DARKORANGE" />
+            <Label layoutX="444.0" layoutY="420.0" prefHeight="10.0" prefWidth="190.0" text="If you already have an account? " />
+            <Hyperlink fx:id="urlLogin" layoutX="626.0" layoutY="417.0" onAction="#onLinkClicked" prefHeight="23.0" prefWidth="82.0" text="Login Now" textFill="#003cff" />
             <Label fx:id="badSignup" layoutX="213.0" layoutY="337.0" prefHeight="35.0" prefWidth="198.0" textFill="red" />
-            <TextField fx:id="nameTf" layoutX="91.0" layoutY="57.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
-            <TextField fx:id="usernameTf" layoutX="90.0" layoutY="136.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
-            <TextField fx:id="emailTf" layoutX="92.0" layoutY="214.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
-            <PasswordField fx:id="passwordTf" layoutX="91.0" layoutY="294.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
-            <CheckBox fx:id="professorCB" layoutX="97.0" layoutY="346.0" mnemonicParsing="false" text="I am a professor" />
+            <TextField fx:id="nameTf" layoutX="444.0" layoutY="70.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
+            <TextField fx:id="usernameTf" layoutX="444.0" layoutY="139.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
+            <TextField fx:id="emailTf" layoutX="444.0" layoutY="208.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
+            <PasswordField fx:id="passwordTf" layoutX="444.0" layoutY="273.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
+            <CheckBox fx:id="professorCB" layoutX="446.0" layoutY="320.0" mnemonicParsing="false" text="I am a professor" />
+            <ImageView fitHeight="550.0" fitWidth="444.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images/Queue-pana.png" />
+               </image>
+            </ImageView>
+            <Label contentDisplay="CENTER" layoutX="539.0" layoutY="-15.0" prefHeight="40.0" prefWidth="118.0" styleClass="text-fiells" text="SIGN UP" textAlignment="CENTER" textFill="#286090">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <Label contentDisplay="CENTER" layoutX="177.0" layoutY="31.0" prefHeight="24.0" prefWidth="164.0" styleClass="text-fiells" text="SIGN UP" textAlignment="CENTER" textFill="DARKORANGE">
-         <font>
-            <Font name="System Bold" size="28.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

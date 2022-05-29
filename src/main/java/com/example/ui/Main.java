@@ -11,12 +11,11 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         if(Token.getToken()!=null){
             fxmlLoader = new FXMLLoader(Main.class.getResource("views/schedules.fxml"));
-            stage.setMinWidth(814);
         }else{
             fxmlLoader = new FXMLLoader(Main.class.getResource("views/Log-in.fxml"));
         }
-        fxmlLoader = new FXMLLoader(Main.class.getResource("views/chat-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 495);
+
+        Scene scene = new Scene(fxmlLoader.load(), 814, 495);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

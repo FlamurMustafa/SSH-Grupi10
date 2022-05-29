@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -13,24 +15,33 @@
 <AnchorPane prefHeight="457.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.controllers.Login">
    <children>
       <HBox layoutX="-2.0" layoutY="1.0" prefHeight="130.0" prefWidth="496.0" />
-      <Pane layoutY="127.0" prefHeight="329.0" prefWidth="494.0">
+      <Pane layoutY="127.0" prefHeight="329.0" prefWidth="814.0">
          <children>
-            <Label layoutX="85.0" layoutY="31.0" prefHeight="35.0" prefWidth="133.0" text="Email or username" />
-            <Label layoutX="86.0" layoutY="123.0" text="Password" />
-            <TextField fx:id="emailTf" layoutX="85.0" layoutY="66.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
-            <Button fx:id="loginBtn" defaultButton="true" layoutX="169.0" layoutY="225.0" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #FF8C00; -fx-background-radius: 10;" text="Log In" textFill="#f4eeee">
+            <Label layoutX="451.0" layoutY="31.0" prefHeight="35.0" prefWidth="133.0" text="Email or username" />
+            <Label layoutX="451.0" layoutY="121.0" text="Password" />
+            <TextField fx:id="emailTf" layoutX="451.0" layoutY="66.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
+            <Button fx:id="loginBtn" defaultButton="true" layoutX="450.0" layoutY="217.0" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="35.0" prefWidth="134.0" style="-fx-background-color: #286090; -fx-background-radius: 10;" text="Log In" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
             <Label fx:id="popUp" layoutX="6.0" layoutY="14.0" prefHeight="17.0" prefWidth="207.0" />
-            <Label layoutX="185.0" layoutY="279.0" prefHeight="17.0" prefWidth="154.0" text="If you haven't registerd yet?" />
-            <Hyperlink fx:id="SignupLink" layoutX="332.0" layoutY="276.0" onAction="#onLinkClicked" text="Register Now" textFill="DARKORANGE" />
+            <Label layoutX="451.0" layoutY="278.0" prefHeight="17.0" prefWidth="154.0" text="If you haven't registerd yet?" />
+            <Hyperlink fx:id="SignupLink" layoutX="620.0" layoutY="275.0" onAction="#onLinkClicked" text="Register Now" textFill="#003cff" />
             <Label fx:id="badRequest" layoutX="85.0" layoutY="194.0" prefHeight="23.0" prefWidth="319.0" textFill="red" />
-            <PasswordField fx:id="passwordTf" layoutX="85.0" layoutY="147.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
+            <PasswordField fx:id="passwordTf" layoutX="451.0" layoutY="147.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
+            <Pane layoutX="-1.0" layoutY="-128.0" prefHeight="457.0" prefWidth="400.0">
+               <children>
+                  <ImageView fitHeight="457.0" fitWidth="412.0" layoutY="1.0">
+                     <image>
+                        <Image url="@../../../../images/Tablet%20login-rafiki.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
       </Pane>
-      <Label layoutX="171.0" layoutY="59.0" prefHeight="48.0" prefWidth="114.0" text="LOG IN" textFill="DARKORANGE">
+      <Label layoutX="553.0" layoutY="66.0" prefHeight="48.0" prefWidth="114.0" text="LOG IN" textFill="#286090">
          <font>
             <Font name="System Bold" size="29.0" />
          </font>
