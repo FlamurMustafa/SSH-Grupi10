@@ -47,7 +47,6 @@ public class Login {
             e.printStackTrace();
         }
     }
-
     @FXML
     private void onLoginClicked(ActionEvent action) throws IOException, InterruptedException {
 
@@ -68,7 +67,6 @@ public class Login {
                         .build();
 
                 Call call = client.newCall(req);
-
                 Response res = call.execute();
 
                 if (res.isSuccessful()) {
