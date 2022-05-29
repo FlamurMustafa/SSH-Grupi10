@@ -88,7 +88,7 @@ userRoute.get("/", Auth, (req, res) => {
 
   try {
     pool.query(
-      "SELECT username, email, role_id, name FROM user where userid = ?",
+      "SELECT userid, username, email, role_id, name FROM user where userid = ?",
       [req.userId],
       (error, result) => {
         if (error) return res.status(400).json({ error });
