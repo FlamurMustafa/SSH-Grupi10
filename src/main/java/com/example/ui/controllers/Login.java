@@ -52,7 +52,7 @@ public class Login {
     private void onLoginClicked(ActionEvent action) throws IOException, InterruptedException {
 
         if (emailTf.getText().isEmpty() || passwordTf.getText().isEmpty()) {
-            badRequest.setText("Please fill the field");
+            badRequest.setText("Please fill all the fields");
         } else {
             try {
                 OkHttpClient client = new OkHttpClient();

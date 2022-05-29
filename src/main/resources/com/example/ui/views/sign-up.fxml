@@ -46,6 +46,6 @@
             <Image url="@../../../../images/Queue-pana.png" />
          </image>
       </ImageView>
-      <Label fx:id="badSignup" layoutX="576.0" layoutY="343.0" prefHeight="35.0" prefWidth="198.0" textFill="red" />
+      <Label fx:id="badSignup" layoutX="586.0" layoutY="349.0" prefHeight="23.0" prefWidth="182.0" textFill="red" />
    </children>
 </AnchorPane>
