@@ -1,5 +1,7 @@
 package com.example.ui;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Schedule {
@@ -12,8 +14,8 @@ public class Schedule {
     public Schedule(Integer scheduleId, Integer roomId, String startTime, String endTime, String className) {
         this.scheduleId = scheduleId;
         this.roomId = roomId;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = timeStampConvertToTime(startTime);
+        this.endTime = timeStampConvertToTime(endTime);
         this.className = className;
     }
 
@@ -55,5 +57,25 @@ public class Schedule {
 
     public void setClassId(String classId) {
         this.className = className;
+    }
+
+    private static SimpleDateFormat timestampformat =
+            new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.mmm'Z'");
+
+    private static SimpleDateFormat sdftimeformat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+    private static SimpleDateFormat getSdftimeformat() {
+        return sdftimeformat;
+    }
+    public static String timeStampConvertToTime(String time) {
+        Date date1 = null;
+
+        try {
+            date1 = timestampformat.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String formattedTime = getSdftimeformat().format(date1);
+        return formattedTime;
     }
 }

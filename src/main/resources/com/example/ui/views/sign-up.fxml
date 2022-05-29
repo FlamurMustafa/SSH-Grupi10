@@ -29,17 +29,11 @@
             </Button>
             <Label layoutX="444.0" layoutY="420.0" prefHeight="10.0" prefWidth="190.0" text="If you already have an account? " />
             <Hyperlink fx:id="urlLogin" layoutX="626.0" layoutY="417.0" onAction="#onLinkClicked" prefHeight="23.0" prefWidth="82.0" text="Login Now" textFill="#003cff" />
-            <Label fx:id="badSignup" layoutX="213.0" layoutY="337.0" prefHeight="35.0" prefWidth="198.0" textFill="red" />
             <TextField fx:id="nameTf" layoutX="444.0" layoutY="70.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
             <TextField fx:id="usernameTf" layoutX="444.0" layoutY="139.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
             <TextField fx:id="emailTf" layoutX="444.0" layoutY="208.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
             <PasswordField fx:id="passwordTf" layoutX="444.0" layoutY="273.0" prefHeight="35.0" prefWidth="319.0" style="-fx-border-color: #000000; -fx-border-radius: 6;" />
             <CheckBox fx:id="professorCB" layoutX="446.0" layoutY="320.0" mnemonicParsing="false" text="I am a professor" />
-            <ImageView fitHeight="550.0" fitWidth="444.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../images/Queue-pana.png" />
-               </image>
-            </ImageView>
             <Label contentDisplay="CENTER" layoutX="539.0" layoutY="-15.0" prefHeight="40.0" prefWidth="118.0" styleClass="text-fiells" text="SIGN UP" textAlignment="CENTER" textFill="#286090">
                <font>
                   <Font name="System Bold" size="28.0" />
@@ -47,5 +41,11 @@
             </Label>
          </children>
       </Pane>
+      <ImageView fitHeight="550.0" fitWidth="444.0" layoutX="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/Queue-pana.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="badSignup" layoutX="576.0" layoutY="343.0" prefHeight="35.0" prefWidth="198.0" textFill="red" />
    </children>
 </AnchorPane>
