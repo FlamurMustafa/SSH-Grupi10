@@ -160,22 +160,22 @@
                <center>
                   <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="createBtn" layoutX="387.0" layoutY="14.0" minWidth="53.0" mnemonicParsing="false" onAction="#onCreateClicked" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #286090;" text="CREATE" textFill="WHITE">
+                        <Button fx:id="createBtn" layoutX="365.0" layoutY="14.0" minWidth="53.0" mnemonicParsing="false" onAction="#onCreateClicked" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #286090;" text="CREATE" textFill="WHITE">
                            <font>
                               <Font name="Arial" size="11.0" />
                            </font>
                         </Button>
                         <TextField alignment="CENTER" layoutX="50.0" layoutY="14.0" prefHeight="30.0" prefWidth="164.0" promptText="Search" style="-fx-background-color: #ededed;" />
-                        <TableView fx:id="tableView" layoutX="50.0" layoutY="66.0" prefHeight="289.0" prefWidth="475.0">
+                        <TableView fx:id="tableView" layoutX="52.0" layoutY="66.0" prefHeight="289.0" prefWidth="455.0">
                           <columns>
-                            <TableColumn fx:id="scheduleField" prefWidth="45.0" text="SID" />
-                            <TableColumn fx:id="roomField" prefWidth="108.0" text="Room" />
-                              <TableColumn fx:id="startTimeField" prefWidth="108.0" text="StartTime" />
-                              <TableColumn fx:id="endTimeField" prefWidth="108.0" text="EndTime" />
-                              <TableColumn fx:id="classField" prefWidth="108.0" text="Class" />
+                            <TableColumn fx:id="scheduleField" minWidth="35.0" prefWidth="35.0" resizable="false" text="SID" />
+                            <TableColumn fx:id="roomField" minWidth="50.0" prefWidth="50.0" resizable="false" text="Room" />
+                              <TableColumn fx:id="startTimeField" minWidth="110.0" prefWidth="110.0" resizable="false" text="StartTime" />
+                              <TableColumn fx:id="endTimeField" minWidth="110.0" prefWidth="110.0" resizable="false" text="EndTime" />
+                              <TableColumn fx:id="classField" minWidth="150.0" prefWidth="150.0" resizable="false" text="Class" />
                           </columns>
                         </TableView>
-                        <Button fx:id="deleteBtn" layoutX="462.0" layoutY="14.0" minWidth="53.0" mnemonicParsing="false" onAction="#onDeleteClicked" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #286090;" text="DELETE" textFill="WHITE">
+                        <Button fx:id="deleteBtn" layoutX="444.0" layoutY="14.0" minWidth="53.0" mnemonicParsing="false" onAction="#onDeleteClicked" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #286090;" text="DELETE" textFill="WHITE">
                            <font>
                               <Font name="Arial" size="11.0" />
                            </font>
