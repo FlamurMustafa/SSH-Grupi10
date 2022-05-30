@@ -190,8 +190,4 @@ public class ScheduleController implements Initializable {
 
         Token.deleteToken();
     }
-
-    public void onSearchClicked(ActionEvent event) throws IOException{
-
-    }
 }
