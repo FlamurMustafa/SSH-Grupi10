@@ -1,4 +1,4 @@
-package com.example.ui;
+package com.example.ui.statics;
 
 import java.io.File;
 import java.io.FileReader;

@@ -1,8 +1,8 @@
 package com.example.ui.controllers;
 
-import com.example.ui.AlertBox;
-import com.example.ui.Schedule;
-import com.example.ui.Token;
+import com.example.ui.models.AlertBox;
+import com.example.ui.models.Schedule;
+import com.example.ui.statics.Token;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

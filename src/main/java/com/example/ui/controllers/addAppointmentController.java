@@ -1,6 +1,6 @@
 package com.example.ui.controllers;
 
-import com.example.ui.Token;
+import com.example.ui.statics.Token;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import okhttp3.*;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 

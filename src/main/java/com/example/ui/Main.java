@@ -1,5 +1,6 @@
 package com.example.ui;
 
+import com.example.ui.statics.Token;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ public class Main extends Application {
         }else{
             fxmlLoader = new FXMLLoader(Main.class.getResource("views/Log-in.fxml"));
         }
+
 
         Scene scene = new Scene(fxmlLoader.load(), 814, 495);
         stage.setTitle("Hello!");

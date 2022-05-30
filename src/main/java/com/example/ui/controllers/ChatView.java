@@ -1,21 +1,16 @@
 package com.example.ui.controllers;
 
-import com.example.ui.ChatUser;
-import com.example.ui.Schedule;
-import com.example.ui.Token;
-import com.example.ui.UserRequests;
+import com.example.ui.models.ChatUser;
+import com.example.ui.statics.Token;
+import com.example.ui.statics.UserRequests;
 import com.example.ui.chat.PeerHandler;
 import com.example.ui.chat.ServerThread;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -27,7 +22,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,18 +31,21 @@ public class ChatView implements Initializable {
     VBox vbox;
 
     @FXML
-    VBox chatV;
+    VBox receiverVbox;
+
+    @FXML
+    VBox senderVbox;
 
     @FXML
     TextField m;
+
+    @FXML
+    TextField groupMemberTf;
 
     ServerThread serverThread;
     BufferedReader bufferedReader;
     int port;
 
-
-    @FXML
-    GridPane gridPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,12 +61,11 @@ public class ChatView implements Initializable {
         Response res = null;
         try {
             String usr = UserRequests.getUser();
-            int p = (int) usr.charAt(usr.length() - 1);
+            int p = Character.getNumericValue(usr.charAt(usr.length() - 1));
             p = p + 3050;
             System.out.println(p);
             serverThread = new ServerThread(String.valueOf(p));
             serverThread.start();
-
 
             res = call.execute();
 
@@ -92,37 +88,46 @@ public class ChatView implements Initializable {
     }
 
     public void vboxClicked(MouseEvent mouseEvent) throws Exception {
-        chatV.getChildren().clear();
+        senderVbox.getChildren().clear();
+        receiverVbox.getChildren().clear();
 
         String s = mouseEvent.getTarget().toString();
         String subS = s.substring(s.indexOf("\"") + 1, s.lastIndexOf("\""));
         this.port = 3050 + Character.getNumericValue(subS.charAt(subS.length() - 1));
         String user = subS.substring(0, subS.length() - 1);
         updateListenToPeers(user);
-
-
     }
 
     public void updateListenToPeers(String username) throws Exception {
 
-
         Socket socket = null;
+        String currentUser = UserRequests.getUser();
+        currentUser = currentUser.substring(0,currentUser.length()-1);
+        if(username.equalsIgnoreCase(currentUser))  {
+            receiverVbox.getChildren().add(new Label("Nuk mund te selektoni veten"));
+                    return;
+        }
         try {
-            socket = new Socket("localhost", 3055);
-            new PeerHandler(socket, chatV).start();
+            socket = new Socket("localhost", this.port);
+            String m = "You are now talking to "+username;
+            receiverVbox.getChildren().add(new Label(m));
+            new PeerHandler(socket, receiverVbox, senderVbox, username).start();
         } catch (Exception e) {
             if (socket == null) {
+                receiverVbox.getChildren().add(new Label("Perdoruesi eshte offline"));
                 System.out.println("Gabim!");
             }
             socket.close();
         }
     }
 
-
-
-
     public void sendButtonClicked(MouseEvent mouseEvent) {
+        Label label = new Label(m.getText());
+        receiverVbox.getChildren().add(new Label());
+        senderVbox.getChildren().add(label);
         this.serverThread.send(m.getText());
         m.clear();
     }
+
+
 }

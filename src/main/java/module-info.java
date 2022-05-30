@@ -11,4 +11,8 @@ module com.example.ui {
     opens com.example.ui to javafx.fxml;
     opens com.example.ui.controllers to javafx.fxml;
     exports com.example.ui;
+    exports com.example.ui.models;
+    opens com.example.ui.models to javafx.fxml;
+    exports com.example.ui.statics;
+    opens com.example.ui.statics to javafx.fxml;
 }

@@ -45,7 +45,7 @@ userRoute.post("/signup", async (req, res) => {
 
 userRoute.get("/others", Auth, (req, res)=>{
   try{
-    pool.query("Select userid, username from user", (response, error)=>{
+    pool.query("Select userid, role_id, username from user", (response, error)=>{
       if(error) return res.send(error);
       res.send(response);
     })

@@ -1,4 +1,4 @@
-package com.example.ui;
+package com.example.ui.models;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

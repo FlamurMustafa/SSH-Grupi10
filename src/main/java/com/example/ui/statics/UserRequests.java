@@ -1,4 +1,4 @@
-package com.example.ui;
+package com.example.ui.statics;
 
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -32,5 +32,4 @@ public class UserRequests {
         }
         return user+u.getInt("userid");
         }
-
 }
