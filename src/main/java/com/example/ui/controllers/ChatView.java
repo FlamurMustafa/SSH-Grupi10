@@ -182,7 +182,7 @@ public class ChatView implements Initializable {
 
     public void leaveBtnClicked(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/com/example/ui/views/sign-up.fxml"));
+        loader.setLocation(getClass().getResource("/com/example/ui/views/schedules.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
