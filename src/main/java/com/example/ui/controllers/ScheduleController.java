@@ -186,6 +186,10 @@ public class ScheduleController implements Initializable {
         }
     }
 
+    public void onUpdateClicked(ActionEvent event) throws IOException {
+        getSchedules(client, token);
+    }
+
     @FXML
     public void onOKclicked(ActionEvent event) throws IOException {
         if(searchField.getText().isBlank()){

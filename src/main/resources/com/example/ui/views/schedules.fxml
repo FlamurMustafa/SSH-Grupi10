@@ -180,7 +180,8 @@
                               <Font name="Arial" size="11.0" />
                            </font>
                         </Button>
-                        <Button fx:id="searchBttn" layoutX="175.0" layoutY="14.0" mnemonicParsing="false" onAction="#onOKclicked" style="-fx-background-color: #286090;" text="OK" textFill="WHITE" />
+                        <Button fx:id="searchBttn" layoutX="175.0" layoutY="14.0" minWidth="34.0" mnemonicParsing="false" onAction="#onOKclicked" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: #286090;" text="OK" textFill="WHITE" />
+                        <Button fx:id="updateButton" layoutX="248.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateClicked" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: #286090;" text="UPDATE" textFill="WHITE" />
                      </children>
                   </Pane>
                </center>
