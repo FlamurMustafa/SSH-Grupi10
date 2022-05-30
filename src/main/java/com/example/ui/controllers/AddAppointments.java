@@ -16,7 +16,7 @@ import okhttp3.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class addAppointmentController {
+public class AddAppointments {
     //DatePicker
     @FXML
     private DatePicker datePicker;
