@@ -73,6 +73,29 @@ classRoute.get("/", Auth, (req, res) => {
   }
 });
 
+classRoute.get("/search", Auth, (req, res)=>{
+console.log(req.query.sql);
+  if (req.role_Id === 0) {
+      pool.query(
+        "SELECT c.class_name, s.scheduleid, s.room_id, s.start_time, s.end_time FROM managmentsys.class c, managmentsys.schedule s, managmentsys.`student-classes` sc WHERE c.classid = s.classid AND sc.class_classid = c.classid AND class_name=?",
+        [req.query.sql],
+        (errorq, result) => {
+          if (errorq) res.status(500).send({ errorq });
+          return res.send(result);
+        }
+      );
+    } else {
+      pool.query(
+        `SELECT c.class_name, s.scheduleid, s.room_id, s.start_time, s.end_time FROM managmentsys.class c, managmentsys.schedule s WHERE c.classid = s.classid AND class_name=?`,
+        [req.query.sql],
+        (errorq, resultq) => {
+          if (errorq) return res.status(500).send(errorq);
+          else return res.send(resultq);
+        }
+      );
+    }
+  });
+
 classRoute.delete("/", Auth, (req, res) => {
   if(req.role_Id===0) return res.status(401).send({"mistake":"You can't delete schedules"});
   pool.query(

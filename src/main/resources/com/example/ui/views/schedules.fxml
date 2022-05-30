@@ -165,7 +165,7 @@
                               <Font name="Arial" size="11.0" />
                            </font>
                         </Button>
-                        <TextField alignment="CENTER" layoutX="50.0" layoutY="14.0" prefHeight="30.0" prefWidth="164.0" promptText="Search" style="-fx-background-color: #ededed;" />
+                        <TextField fx:id="searchField" alignment="CENTER" layoutX="50.0" layoutY="14.0" prefHeight="30.0" prefWidth="114.0" promptText="Search" style="-fx-background-color: #ededed;" />
                         <TableView fx:id="tableView" layoutX="52.0" layoutY="66.0" prefHeight="289.0" prefWidth="455.0">
                           <columns>
                             <TableColumn fx:id="scheduleField" minWidth="35.0" prefWidth="35.0" resizable="false" text="SID" />
@@ -180,6 +180,7 @@
                               <Font name="Arial" size="11.0" />
                            </font>
                         </Button>
+                        <Button fx:id="searchBttn" layoutX="175.0" layoutY="14.0" mnemonicParsing="false" onAction="#onOKclicked" style="-fx-background-color: #286090;" text="OK" textFill="WHITE" />
                      </children>
                   </Pane>
                </center>

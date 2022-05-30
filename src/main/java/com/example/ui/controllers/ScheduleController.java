@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -56,6 +57,12 @@ public class ScheduleController implements Initializable {
 
     @FXML
     private TableColumn<Schedule, String> classField;
+
+    @FXML
+    private Button searchBttn;
+
+    @FXML
+    private TextField searchField;
 
     private String token;
 
@@ -179,6 +186,50 @@ public class ScheduleController implements Initializable {
         }
     }
 
+    @FXML
+    public void onOKclicked(ActionEvent event) throws IOException {
+        if(searchField.getText().isBlank()){
+            AlertBox.display("WARNING", "The search field is empty!");
+        }
+        else{
+            String urlParam = searchField.getText().replace(" ", "%20");
+
+            Request request = new Request.Builder()
+                    .url("http://localhost:3000/class/search/?sql=" + urlParam)
+                    .header("Authorization", token)
+                    .get()
+                    .build();
+
+            Call call = client.newCall(request);
+            Response res = call.execute();
+            JSONArray searchScheduleArray = new JSONArray(res.body().string());
+
+
+            if(searchScheduleArray.length() == 0){
+                AlertBox.display("Sorry", "There are no schedules for the class " + searchField.getText() + "!");
+            }
+            else{
+                ObservableList<Schedule> searchScheduleList = FXCollections.observableArrayList();
+
+                for (int i = 0; i < searchScheduleArray.length(); i++) {
+                    JSONObject scheduleObject = searchScheduleArray.getJSONObject(i);
+                    searchScheduleList.add(new Schedule(scheduleObject.getInt("scheduleid"),
+                            scheduleObject.getInt("room_id"),
+                            scheduleObject.getString("start_time"),
+                            scheduleObject.getString("end_time"),
+                            scheduleObject.getString("class_name")));
+                }
+
+                scheduleField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("scheduleId"));
+                roomField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("roomId"));
+                startTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("startTime"));
+                endTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("endTime"));
+                classField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("classId"));
+                tableView.setItems(searchScheduleList);
+            }
+        }
+    }
+
     public void onLogOutClicked(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/com/example/ui/views/Log-in.fxml"));
@@ -189,9 +240,5 @@ public class ScheduleController implements Initializable {
         stage.show();
 
         Token.deleteToken();
-    }
-
-    public void onSearchClicked(ActionEvent event) throws IOException{
-
     }
 }
