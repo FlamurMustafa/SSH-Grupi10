@@ -73,9 +73,9 @@ public class Signup implements Iterable {
         if (name.isEmpty() || password.isEmpty() || email.isEmpty() || username.isEmpty()) {
             badSignup.setText("Please fill all the text fields");
         }
-//        else if(!pattern2.matcher(password).matches()) {
-//            badSignup.setText("Please write vaild password ");
-//        }
+        else if(!pattern2.matcher(password).matches()) {
+            badSignup.setText("Please write vaild password ");
+        }
         else if(!pattern.matcher(email).matches()){
            badSignup.setText("Please write vaild email ");
         }
@@ -110,6 +110,12 @@ public class Signup implements Iterable {
                     badSignup.setText("Please write correct your credentials");
                 }
             } catch (Exception e) {
+
+                nameTf.clear();
+                usernameTf.clear();
+                emailTf.clear();
+                passwordTf.clear();
+
                 badSignup.setText("An error occurred");
                 e.printStackTrace();
             }
