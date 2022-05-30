@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -56,6 +57,12 @@ public class ScheduleController implements Initializable {
 
     @FXML
     private TableColumn<Schedule, String> classField;
+
+    @FXML
+    private Button searchBttn;
+
+    @FXML
+    private TextField searchField;
 
     private String token;
 
@@ -175,6 +182,47 @@ public class ScheduleController implements Initializable {
             }
             else if(res.code()==401){
                 AlertBox.display("You are a student", "You DO NOT have the RIGHTS to DELETE schedules!");
+            }
+        }
+    }
+
+    @FXML
+    public void onOKclicked(ActionEvent event) throws IOException {
+        if(searchField.getText() == null){
+            AlertBox.display("WARNING", "The search field is empty!");
+        }
+        else{
+            Request request = new Request.Builder()
+                    .url("http://localhost:3000/class/search" + searchField.getText())
+                    .header("Authorization", token)
+                    .get()
+                    .build();
+
+            Call call = client.newCall(request);
+            Response res = call.execute();
+            if(res.isSuccessful()){
+
+                JSONArray searchScheduleArray = new JSONArray(res.body().string());
+                ObservableList<Schedule> searchScheduleList = FXCollections.observableArrayList();
+
+                for (int i = 0; i < searchScheduleArray.length(); i++) {
+                    JSONObject scheduleObject = searchScheduleArray.getJSONObject(i);
+                    searchScheduleList.add(new Schedule(scheduleObject.getInt("scheduleid"),
+                            scheduleObject.getInt("room_id"),
+                            scheduleObject.getString("start_time"),
+                            scheduleObject.getString("end_time"),
+                            scheduleObject.getString("class_name")));
+                }
+
+                scheduleField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("scheduleId"));
+                roomField.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("roomId"));
+                startTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("startTime"));
+                endTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("endTime"));
+                classField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("classId"));
+
+                tableView.setItems(searchScheduleList);
+            }else{
+                AlertBox.display("WARNING", "There is no schedule for " + searchField.getText() + "!");
             }
         }
     }
