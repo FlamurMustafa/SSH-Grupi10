@@ -7,6 +7,7 @@ import com.example.ui.chat.PeerHandler;
 import com.example.ui.chat.ServerThread;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -24,6 +25,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ChatView implements Initializable {
@@ -40,11 +43,15 @@ public class ChatView implements Initializable {
     TextField m;
 
     @FXML
+    VBox groupUsers;
+
+    @FXML
     TextField groupMemberTf;
 
     ServerThread serverThread;
     BufferedReader bufferedReader;
     int port;
+    List<String> list = new ArrayList<>();
 
 
     @Override
@@ -130,4 +137,36 @@ public class ChatView implements Initializable {
     }
 
 
+    public void addBtnClicked(ActionEvent actionEvent) {
+        list.add(groupMemberTf.getText());
+        groupUsers.getChildren().add(new Label(groupMemberTf.getText()));
+        groupMemberTf.clear();
+    }
+
+    public void startBtnClicked(ActionEvent actionEvent) throws Exception {
+        String user = null;
+        int port = 0;
+        for (int i = 0; i < list.size(); i++) {
+            int length = list.get(i).length();
+            user = list.get(i).substring(0,length-1);
+            port = Character.getNumericValue(list.get(i).charAt(length-1));
+            port = port+3050;
+            updateListenToPeersGroup(user, port);
+        }
+    }
+    public void updateListenToPeersGroup(String username, int port) throws Exception {
+        Socket socket = null;
+        try {
+            socket = new Socket("localhost", port);
+            String m = "You are now talking to "+username;
+            receiverVbox.getChildren().add(new Label(m));
+            new PeerHandler(socket, receiverVbox, senderVbox, username).start();
+        } catch (Exception e) {
+            if (socket == null) {
+                receiverVbox.getChildren().add(new Label("Perdoruesi eshte offline"));
+                System.out.println("Gabim!");
+            }
+            socket.close();
+        }
+    }
 }
