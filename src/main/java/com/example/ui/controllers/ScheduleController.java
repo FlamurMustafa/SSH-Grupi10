@@ -59,9 +59,6 @@ public class ScheduleController implements Initializable {
     private TableColumn<Schedule, String> classField;
 
     @FXML
-    private Button searchBttn;
-
-    @FXML
     private TextField searchField;
 
     private String token;

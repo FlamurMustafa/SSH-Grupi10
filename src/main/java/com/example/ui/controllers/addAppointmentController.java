@@ -16,8 +16,6 @@ import okhttp3.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-
 public class addAppointmentController {
     //DatePicker
     @FXML
@@ -43,16 +41,6 @@ public class addAppointmentController {
         String endtime = myDate + " "+ end_time.getText() +":00";
         String classname = class_name.getText();
 
-//        if (myDate.toString().isBlank() || starttime.isBlank() || endtime.isBlank() || roomname.isBlank() || classname.isBlank()) {
-//            showMessageDialog(null, "Please fill the text field!");
-//        }
-//        else if (!starttime.matches("(0[89]|1[0-9]|20)") && !endtime.matches("(0[89]|1[0-9]|20)")) {
-//            showMessageDialog(null, "The start and end time should be between 08 am to 08 pm(08-20)!");
-//        }
-//        else if (!roomname.matches("[a-zA-Z0-9]+") && !classname.matches("[a-zA-Z0-9]+")) {
-//            showMessageDialog(null, "The room and class name should contain only letters and numbers!");
-//        }
-//        else {
             try {
                 OkHttpClient client = new OkHttpClient();
                 RequestBody formBody = new FormBody.Builder()
