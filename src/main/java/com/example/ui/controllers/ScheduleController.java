@@ -188,21 +188,27 @@ public class ScheduleController implements Initializable {
 
     @FXML
     public void onOKclicked(ActionEvent event) throws IOException {
-        if(searchField.getText() == null){
+        if(searchField.getText().isBlank()){
             AlertBox.display("WARNING", "The search field is empty!");
         }
         else{
+            String urlParam = searchField.getText().replace(" ", "%20");
+
             Request request = new Request.Builder()
-                    .url("http://localhost:3000/class/search" + searchField.getText())
+                    .url("http://localhost:3000/class/search/?sql=" + urlParam)
                     .header("Authorization", token)
                     .get()
                     .build();
 
             Call call = client.newCall(request);
             Response res = call.execute();
-            if(res.isSuccessful()){
+            JSONArray searchScheduleArray = new JSONArray(res.body().string());
 
-                JSONArray searchScheduleArray = new JSONArray(res.body().string());
+
+            if(searchScheduleArray.length() == 0){
+                AlertBox.display("Sorry", "There are no schedules for the class " + searchField.getText() + "!");
+            }
+            else{
                 ObservableList<Schedule> searchScheduleList = FXCollections.observableArrayList();
 
                 for (int i = 0; i < searchScheduleArray.length(); i++) {
@@ -219,10 +225,7 @@ public class ScheduleController implements Initializable {
                 startTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("startTime"));
                 endTimeField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("endTime"));
                 classField.setCellValueFactory(new PropertyValueFactory<Schedule, String>("classId"));
-
                 tableView.setItems(searchScheduleList);
-            }else{
-                AlertBox.display("WARNING", "There is no schedule for " + searchField.getText() + "!");
             }
         }
     }

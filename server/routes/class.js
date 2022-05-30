@@ -74,6 +74,7 @@ classRoute.get("/", Auth, (req, res) => {
 });
 
 classRoute.get("/search", Auth, (req, res)=>{
+console.log(req.query.sql);
   if (req.role_Id === 0) {
       pool.query(
         "SELECT c.class_name, s.scheduleid, s.room_id, s.start_time, s.end_time FROM managmentsys.class c, managmentsys.schedule s, managmentsys.`student-classes` sc WHERE c.classid = s.classid AND sc.class_classid = c.classid AND class_name=?",
