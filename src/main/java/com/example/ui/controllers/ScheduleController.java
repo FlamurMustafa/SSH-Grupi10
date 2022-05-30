@@ -242,4 +242,15 @@ public class ScheduleController implements Initializable {
 
         Token.deleteToken();
     }
+
+    @FXML
+    public void onChatClicked(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/com/example/ui/views/chat-view.fxml"));
+        Parent root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

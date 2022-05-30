@@ -166,7 +166,7 @@
                            </font>
                         </Button>
                         <TextField fx:id="searchField" alignment="CENTER" layoutX="50.0" layoutY="14.0" prefHeight="30.0" prefWidth="114.0" promptText="Search" style="-fx-background-color: #ededed;" />
-                        <TableView fx:id="tableView" layoutX="52.0" layoutY="66.0" prefHeight="289.0" prefWidth="455.0">
+                        <TableView fx:id="tableView" layoutX="52.0" layoutY="66.0" prefHeight="248.0" prefWidth="455.0">
                           <columns>
                             <TableColumn fx:id="scheduleField" minWidth="35.0" prefWidth="35.0" resizable="false" text="SID" />
                             <TableColumn fx:id="roomField" minWidth="50.0" prefWidth="50.0" resizable="false" text="Room" />
@@ -181,7 +181,8 @@
                            </font>
                         </Button>
                         <Button fx:id="searchBttn" layoutX="175.0" layoutY="14.0" minWidth="34.0" mnemonicParsing="false" onAction="#onOKclicked" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: #286090;" text="OK" textFill="WHITE" />
-                        <Button fx:id="updateButton" layoutX="248.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateClicked" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: #286090;" text="UPDATE" textFill="WHITE" />
+                        <Button fx:id="updateButton" layoutX="248.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUpdateClicked" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: #3AA8C1;" text="UPDATE" textFill="WHITE" />
+                        <Button layoutX="357.0" layoutY="327.0" mnemonicParsing="false" onAction="#onChatClicked" prefHeight="30.0" prefWidth="162.0" style="-fx-background-color: #6CA0DC;" text="Chat " />
                      </children>
                   </Pane>
                </center>
