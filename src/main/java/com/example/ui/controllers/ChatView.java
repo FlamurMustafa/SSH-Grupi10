@@ -169,4 +169,9 @@ public class ChatView implements Initializable {
             socket.close();
         }
     }
+
+    public void clearBtnClicked(ActionEvent actionEvent) {
+            list.clear();
+            groupUsers.getChildren().clear();
+    }
 }
